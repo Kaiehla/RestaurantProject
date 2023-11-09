@@ -1,44 +1,158 @@
-﻿@{
+﻿              @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container">
-    <div class="card w-75 mb-3">
-      <div class="card-body">
-            <h5 class="card-title">Package 1</h5>
-            <p class="card-text">Flavored pork (250g), Flavored Beef (250g), ... /p>
-            <a href="#" class="btn btn-primary">BOOK NOW</a>
-      </div>
+
+
+<div class="container mb-5">
+    @*Card 1*@
+    <div class="card">
+        <div class="card-header">
+            Package 1
+        </div>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col">
+                    <img src="https://pix8.agoda.net/hotelImages/1622220/-1/028d55deaf69952582fe7a0ba6eae7a6.jpg?ca=0&ce=1&s=1024x" class="img-fluid">
+                </div>
+                <div class="col">
+                   <div class="card-text">
+                       <ul>
+                           <li>Flavored Pork (250g)</li>
+                           <li>Flavored Beef (250g)</li>
+                           <li>Ssamjang (250g)</li>
+                           <li>Gochujang (250g)</li>
+                           <li>Cheese (250g)</li>
+                           <li>Kimchi(250g)</li>
+                           <li>Lettuce (250g)</li>
+                           <li>Shin Remyun (250g)</li>
+                       </ul>
+                   </div>
+                    <a class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#bookTable">Book Now</a>
+                    
+                </div>
+                @* END OF THIRD COLUMN *@
+            </div>
+        </div>
+    </div>
+    @*END OF CARD 1*@
+
+    <br />
+    @*Card 2*@
+    <div class="card">
+        <div class="card-header">
+            Package 2
+        </div>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col">
+                    <img src="https://pix8.agoda.net/hotelImages/1622220/-1/028d55deaf69952582fe7a0ba6eae7a6.jpg?ca=0&ce=1&s=1024x" class="img-fluid">
+                </div>
+                <div class="col">
+                    <div class="card-text">
+                        <ul>
+                            <li>Flavored Pork (250g)</li>
+                            <li>Flavored Beef (250g)</li>
+                            <li>Ssamjang (250g)</li>
+                            <li>Gochujang (250g)</li>
+                            <li>Cheese (250g)</li>
+                            <li>Kimchi(250g)</li>
+                            <li>Lettuce (250g)</li>
+                            <li>Shin Remyun (250g)</li>
+                        </ul>
+                    </div>
+                    <a class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#bookTable">Book Now</a>
+                </div>
+                @* END OF THIRD COLUMN *@
+            </div>
+        </div>
+    </div>
+    @*END OF CARD 2*@
+
+    <br />
+     @*Card 3*@
+    <div class="card">
+        <div class="card-header">
+            Package 3
+        </div>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col">
+                    <img src="https://pix8.agoda.net/hotelImages/1622220/-1/028d55deaf69952582fe7a0ba6eae7a6.jpg?ca=0&ce=1&s=1024x" class="img-fluid">
+                </div>
+                <div class="col">
+                    <div class="card-text">
+                        <ul>
+                            <li>Flavored Pork (50g)</li>
+                            <li>Flavored Beef (50g)</li>
+                            <li>Ssamjang (250g)</li>
+                            <li>Gochujang (250g)</li>
+                            <li>Cheese (250g)</li>
+                            <li>Kimchi(250g)</li>
+                            <li>Lettuce (250g)</li>
+                            <li>Shin Remyun (250g)</li>
+                        </ul>
+                    </div>
+                    <a class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#bookTable">Book Now</a>
+                </div>
+                @* END OF THIRD COLUMN *@
+            </div>
+        </div>
+    </div>
+    @*END OF CARD 3*@
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="bookTable" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Find A Table</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @*Date Picker*@
+                    <label for="datepicker">Choose a Date:</label><br />
+                    <input id="datepicker" width="276" />
+                    <script>
+                        $('#datepicker').datepicker({
+                            uiLibrary: 'bootstrap5'
+                        });
+                    </script>
+
+                    @*Time Picker*@
+                    <label for="time">Choose a time:</label><br />
+                    <select class="form-select" name="time" id="time">
+                        <option value="9am">9:00 AM</option>
+                        <option value="12pm">12:00 PM</option>
+                        <option value="3pm">3:00 PM</option>
+                        <option value="6pm">6:00 PM</option>
+                        <option value="9pm">9:00 PM</option>
+                    </select>
+
+                    @*Number of Guest Picker*@
+                    <label for="numGuest">Number of Guest</label><br />
+                    <select class="form-select" name="numGuest" id="numGuest">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>  
+                    </select>
+
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" asp-action="BookForm">Next</a>
+                </div>
+            </div>
+        </div>
     </div>
 
 
-    <div class="card w-75 mb-3">
-      <div class="card-body">
-  s     <div class="row">
-                <div class="col-md-4">
-                    <img src="" />
-                </div
-                <div class="col-md-4">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Button</a>
-                </div>
-                <div class="col-md-4">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Button</a>
-                </div>
-          </div>
-        </div>
-
-        <div class="card w-75 mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Package 3</h5>
-                <p class="card-text">Flavored pork (500g), Flavored beef (500g)</p>
-                <a href="#" class="btn btn-primary">BOOK NOW</a>
-            </div>
-        </div>
 </div>
-
-
 

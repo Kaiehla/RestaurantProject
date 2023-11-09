@@ -16,3 +16,19 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.okada-purple {
+    color: #a0377e;
+}
+
+.okada-gold {
+    color: #875e2c
+}
+
+.okada-black {
+    color: #212529
+}
+
+.okada-gray {
+    color: #f2f2f2
+}

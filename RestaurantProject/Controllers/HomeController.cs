@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace RestaurantProject.Controllers
 {
-    public class HomeController : Controller //KAR WAS HERE HI KAI hellooo karylle
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -18,7 +18,12 @@ namespace RestaurantProject.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult BookForm() 
+        {
+            return View();
+        }
+
+        public IActionResult CustomerView()
         {
             return View();
         }
