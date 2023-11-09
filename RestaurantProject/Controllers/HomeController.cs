@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace RestaurantProject.Controllers
 {
-    public class HomeController : Controller //KAR WAS HERE HI KAI hellooo karylle HELLOOO !! hi
+    public class HomeController : Controller //KAR WAS HERE HI KAI hellooo karylle HELLOOO !! hi SABING HI
     {
         private readonly ILogger<HomeController> _logger;
 
