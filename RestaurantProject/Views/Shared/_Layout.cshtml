@@ -19,7 +19,7 @@
 
         @* NAVIGATION BAR START *@
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
                 <div class="container-fluid">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Restaurant Project</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -36,14 +36,28 @@
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark text-center" asp-area="" asp-controller="Home" asp-action="BookForm">
-                                <i class="bi bi-house-door mx-auto" width="24" height ="24"></i></br>
-                                BookNow</a>
+                                <i class="bi bi-pencil-square mx-auto" width="24" height ="24"></i></br>
+                                BookForm</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark text-center" asp-area="" asp-controller="Home" asp-action="CustomerView">
-                                <i class="bi bi-house-door mx-auto" width="24" height ="24"></i></br>
+                                <i class="bi bi-people mx-auto" width="24" height ="24"></i></br>
                                 Customer</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-center" asp-area="" asp-controller="Home" asp-action="ReserveView">
+                                    <i class="bi bi-table mx-auto" width="24" height="24"></i></br>
+                                    Reservation
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-center" asp-area="" asp-controller="Home" asp-action="TableView">
+                                    <i class="bi bi-box mx-auto" width="24" height="24"></i></br>
+                                    Tables
+                                </a>
                             </li>
                         </ul>
                     </div>

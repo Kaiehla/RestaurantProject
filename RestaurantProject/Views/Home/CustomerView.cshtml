@@ -5,16 +5,28 @@
 
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 bg-dark">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+            <div class="col-auto col-md-3 col-xl-2 bg-light">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-dark min-vh-100">
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Admin Dashboard</span>
                     </a>
                     
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <a asp-action="ReserveView" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-action="CustomerView" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-action="TableView" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-box"></i> <span class="ms-1 d-none d-sm-inline">Tables</span>
                             </a>
                         </li>
 
@@ -27,12 +39,6 @@
                         <li>
                             <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
                             </a>
                         </li>
                     </ul>
@@ -55,8 +61,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col py-3">
-                Content area... NDBHDSBDOSBO
+
+        @*Content Area*@
+            <div class="col py-3 ms-3">
+                <h3>@ViewData["Title"]</h3>
             </div>
         </div>
     </div>
