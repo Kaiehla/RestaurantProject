@@ -72,12 +72,52 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">ID</th>
-                            <th scope="col">Table</th> 
-                            <th scope="col" class="text-center">Table Name </th>
+                            <th scope="col">Table Name</th>
                             <th scope="col" class="text-center">Seating Capacity </th>
+                            <th scope="col" class="text-center">Available </th>
                             <th scope="col" class="text-center">Actions</th>
                         </tr>
                     </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>1</td>
+                            <td>Table 1</td>
+                            <td class="text-center">4</td>
+                            <td class="text-center"><span class="badge rounded-pill text-bg-success bg-success">Yes</span></td> @*bg-danger pag cancelled*@
+                            <td class="text-center">
+                                @*Edit*@
+                                <a data-bs-toggle="modal" data-bs-target="#editReserve">
+                                    <i class="bi bi-pencil text-success"></i>
+                                </a>
+
+                                @*Delete*@
+                                <a data-bs-toggle="modal" data-bs-target="#delReserve">
+                                    <i class="bi bi-trash text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>2</td>
+                            <td>Table 2</td>
+                            <td class="text-center">6</td>
+                            <td class="text-center"><span class="badge rounded-pill text-bg-success bg-danger">No</span></td> 
+                            <td class="text-center">
+                                @*Edit*@
+                                <a data-bs-toggle="modal" data-bs-target="#editReserve">
+                                    <i class="bi bi-pencil text-success"></i>
+                                </a>
+
+                                @*Delete*@
+                                <a data-bs-toggle="modal" data-bs-target="#delReserve">
+                                    <i class="bi bi-trash text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
