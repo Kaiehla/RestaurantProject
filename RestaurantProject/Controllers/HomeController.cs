@@ -18,7 +18,7 @@ namespace RestaurantProject.Controllers
             return View();
         }
         //updated
-        public IActionResult BookForm() 
+        public IActionResult BookForm()
         {
             return View();
         }
@@ -28,10 +28,10 @@ namespace RestaurantProject.Controllers
             return View();
         }
 
-        public IActionResult ReserveView()
-        {
-            return View();
-        }
+        //public IActionResult ReserveView()
+        //{
+        //    return View();
+        //}
 
         public IActionResult TableView()
         {
