@@ -13,7 +13,7 @@
 
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                        <a asp-action="ReserveView" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <a asp-action="ReserveView" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Reservations</span>
                         </a>
                     </li>
@@ -71,12 +71,13 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">ReserveID</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Table</th> @*kunin yung equivalent tableid ang ipapakita dito yung table name*@
                         <th scope="col">Customer</th> @*kunin yung equivalent customerid ang ipapakita dito yung customer name*@
                         <th scope="col">Package</th> @*kunin yung equivalent packageid ang ipapakita dito yung package name*@
                         <th scope="col">Reserve Date</th>
                         <th scope="col">Reserve Time</th>
+                        <th scope="col">Phone</th>
                         <th scope="col" class="text-center">Number of Guest </th>
                         <th scope="col" class="text-center">Status</th>
                         <th scope="col" class="text-center">Actions</th>
@@ -90,10 +91,11 @@
                         <th scope="row">1</th>
                         <td>1</td>
                         <td>Table 4</td>
-                        <td>Kaiehla Espiritu</td>
+                        <td><a>Kaiehla Espiritu</a></td> @*Connected sa customer view CustomerID para mapipindot details ni customer*@
                         <td>Package 1</td>
                         <td>11/11/2023</td>
                         <td>12:00 PM</td>
+                        <td>09123456789</td>
                         <td class="text-center">4</td>
                         <td class="text-center"><span class="badge rounded-pill text-bg-success bg-success">Confirmed</span></td> @*bg-danger pag cancelled*@
                         <td class="text-center">
@@ -118,6 +120,7 @@
                         <td>Package 3</td>
                         <td>11/11/2023</td>
                         <td>3:00 PM</td>
+                        <td>09123456789</td>
                         <td class="text-center">8</td>
                         <td class="text-center"><span class="badge rounded-pill text-bg-danger bg-danger">Cancelled</span></td> @*bg-danger pag cancelled*@
                         <td class="text-center">
@@ -178,13 +181,18 @@
                                 <label for="lastName" class="form-label">Last name</label>
                                 <input type="text" class="form-control" id="lastName" value="Espiritu" required="">
                             </div>
+
+                            <div class="col-6 mt-2">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="phone" value="09123456789" required="">
+                            </div>
                         </div>
 
                         <div class="row mt-2">
 
                             <div class="col-6">
                                 @*Date Picker*@
-                                <label for="datepicker">Reserved Date</label>
+                                <label for="datepicker" class="form-label">Reserved Date</label>
                                 <input id="datepicker" width="220" value="11/11/2023" />
                                 <script>
                                     $('#datepicker').datepicker({
@@ -194,7 +202,7 @@
                             </div>
                             <div class="col-6">
                                 @*Time Picker*@
-                                <label for="time">Reserved Time</label>
+                                <label for="time" class="form-label">Reserved Time</label>
                                 <select class="form-select" name="time" id="time">
                                     <option value="9am">9:00 AM</option>
                                     <option selected value="12pm">12:00 PM</option>
@@ -205,11 +213,10 @@
                             </div>
                         </div>
 
-                        <div class="row mt-2">
-
+                        <div class="row">
                             <div class="col-6">
                                 @*Number of Guest *@
-                                <label for="numGuest">Number of Guest</label>
+                                <label for="numGuest" class="form-label">Number of Guest</label>
                                 <select class="form-select" name="numGuest" id="numGuest">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -225,7 +232,7 @@
                             </div>
                             <div class="col-6">
                                 @*Status *@
-                                <label for="status">Status</label>
+                                <label for="status" class="form-label">Status</label>
                                 <select class="form-select" name="status" id="status">
                                     <option value="1">Confirmed</option>
                                     <option value="2">Cancelled</option>
@@ -236,7 +243,8 @@
                 </div>
                 
                 <div class="modal-footer">
-                    <a class="btn btn-primary" asp-action="ReserveView">Update</a>
+                    <a class="btn btn-success-secondary" asp-action="ReserveView">Cancel</a>
+                    <a class="btn btn-success" asp-action="ReserveView">Update</a>
                 </div>
             </div>
         </div>
