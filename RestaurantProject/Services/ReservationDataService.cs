@@ -20,10 +20,30 @@ namespace RestaurantProject.Services
         }
 
         //Gets the data of the Reservation table Asynchronously
-        public async Task<List<Reservation>> GetReservationsAsync()
+        public async Task<List<ReservationExtra>> GetReservationsAsync()
         {
+            var reservationsExtra = new List<ReservationExtra>();
             var reservations = await _appDbContext.Reservation.ToListAsync();
-            return reservations;
+            var customers = await _appDbContext.Customer.ToListAsync();
+            var packageMenus = await _appDbContext.Package_Menu.ToListAsync();
+            var restoTables = await _appDbContext.RestoTable.ToListAsync();
+
+            foreach (var reservation in reservations)
+            {
+                var customer = customers.Where(x => x.Id == reservation.CustomerId).FirstOrDefault();
+                var packageMenu = packageMenus.Where(x => x.Id == reservation.PackageId).FirstOrDefault();
+                var restoTable = restoTables.Where(x => x.Id == reservation.TablesId).FirstOrDefault();
+
+                reservationsExtra.Add(new ReservationExtra
+                {
+                    Reservation = reservation,
+                    Customer = customer,
+                    Package_Menu = packageMenu,
+                    RestoTable = restoTable
+                });
+            }
+
+            return reservationsExtra;
         }
 
         //Add data to Reservation table Asynchronously
