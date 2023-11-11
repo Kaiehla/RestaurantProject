@@ -2,8 +2,6 @@
 @{
     ViewData["Title"] = "Table View";
 }
-
-
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 bg-light">
@@ -87,9 +85,18 @@
                             <tr>
                                 <th scope="row">@count</th>
                                 <td>@data.Id</td>
-                                <td>Table @data.TableName</td>
+                                <td>@data.TableName</td>
                                 <td class="text-center">@data.SeatingCapacity</td>
-                                <td class="text-center"><span class="badge rounded-pill text-bg-success bg-success">NULL</span></td>
+                                @{
+                                    if (data.Availability == "Available")
+                                    {
+                                        <td class="text-center"><span class="badge rounded-pill text-bg-success bg-success">@data.Availability</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-center"><span class="badge rounded-pill text-bg-success bg-danger">@data.Availability</span></td>
+                                    }
+                                }
                                 <td class="text-center">
                                     @*Edit*@
                                     <a data-bs-toggle="modal" data-bs-target="#editReserve">
@@ -111,7 +118,4 @@
 
     </div>
 </div>
-
-
 @*end of overall*@
-</div>

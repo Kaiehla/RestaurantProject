@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestaurantProject.Models
 {
@@ -7,11 +8,12 @@ namespace RestaurantProject.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
+        [Key]
         public int Id { get; set; }
+
         public string PackageName { get; set; }
         public string PackageDescription { get; set; }
         public decimal Price { get; set; }
         public int Duration { get; set; }
-        public int Status { get; set; }
     }
 }
