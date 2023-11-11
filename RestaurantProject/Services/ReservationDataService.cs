@@ -5,21 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RestaurantProject.Services
 {
-    //The ReservationDataService class inherits the IReservationDataService class and must define all the methods listed within the IReservationDataService class
     public class ReservationDataService : IReservationDataService
     {
-        //List that will contain all the information about the Reservation table (ReserveId, CustomerId, TablesId, etc.)
         private List<Reservation> _reservation;
-        //AppdbContext contains information about the database (Table names)
         private AppDbContext _appDbContext;
 
-        //Constructor
         public ReservationDataService(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
 
-        //Gets the data of the Reservation table Asynchronously
         public async Task<List<ReservationExtra>> GetReservationsAsync()
         {
             var reservationsExtra = new List<ReservationExtra>();
@@ -46,12 +41,9 @@ namespace RestaurantProject.Services
             return reservationsExtra;
         }
 
-        //Add data to Reservation table Asynchronously
-        //The data must be within a list, and that list must be turned into a Task
         public async Task<List<Reservation>> AddReservationAsync(Reservation model)
         {
             await _appDbContext.Reservation.AddAsync(model);
-            //It is important to save the changes or else it will not reflect on the database
             await _appDbContext.SaveChangesAsync();
 
             //di ako sure
