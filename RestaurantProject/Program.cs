@@ -1,7 +1,19 @@
+using RestaurantProject.Data;
+using RestaurantProject.Services;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IReservationDataService, ReservationDataService>();
+builder.Services.AddScoped<ICustomerDataService, CustomerDataService>();
+builder.Services.AddScoped<IRestoTableDataService, RestoTableDataService>();
 
 var app = builder.Build();
 
