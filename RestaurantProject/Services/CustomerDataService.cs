@@ -21,9 +21,19 @@ namespace RestaurantProject.Services
             return customers;
         }
 
-        public async Task<List<Customer>> AddCustomerAsync(Customer customer)
+        public async Task AddCustomerAsync(ReserveForm reservation)
         {
-            return null;
+            var entry = new Customer
+            {
+                FirstName = reservation.FirstName,
+                LastName = reservation.LastName,
+                Email = reservation.Email,
+                PhoneNumber = reservation.PhoneNumber,
+                CityAdd = reservation.CityAdd
+            };
+
+            await _appDbContext.Customer.AddAsync(entry);
+            await _appDbContext.SaveChangesAsync();
         }
 
         public async Task<List<Customer>> DeleteCustomerAsync(Customer customer)

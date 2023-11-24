@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantProject.Models;
+using RestaurantProject.Services;
 using System.Diagnostics;
 
 namespace RestaurantProject.Controllers
@@ -7,10 +8,12 @@ namespace RestaurantProject.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private ICustomerDataService _customer;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICustomerDataService customer)
         {
             _logger = logger;
+            _customer = customer;
         }
 
         public IActionResult Index()
@@ -18,9 +21,21 @@ namespace RestaurantProject.Controllers
             return View();
         }
         //updated
-        public IActionResult BookForm()
+
+        [HttpGet]
+        public IActionResult BookForm(String packageId)
         {
+            ViewData["packageId"] = packageId;
+
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitReservation(ReserveForm reservation)
+        {
+            await _customer.AddCustomerAsync(reservation);
+
+            return RedirectToAction("BookForm");
         }
 
         public IActionResult CustomerView()
