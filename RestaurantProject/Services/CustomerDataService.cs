@@ -1,4 +1,4 @@
-﻿using RestaurantProject.Data;
+using RestaurantProject.Data;
 using RestaurantProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -41,14 +41,20 @@ namespace RestaurantProject.Services
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Customer>> DeleteCustomerAsync(Customer customer)
+        public async Task UpdateCustomerAsync(Customer customer)
         {
-            return null;
-        }
+            var selectedCustomer = await _appDbContext.Customer.Where(x => x.Id == customer.Id).FirstOrDefaultAsync();
 
-        public async Task<List<Customer>> UpdateCustomerAsync(Customer customer)
-        {
-            return null;
+            if (selectedCustomer != null)
+            {
+                selectedCustomer.FirstName = customer.FirstName;
+                selectedCustomer.LastName = customer.LastName;
+                selectedCustomer.PhoneNumber = customer.PhoneNumber;
+                selectedCustomer.Email = customer.Email;
+                selectedCustomer.CityAdd = customer.CityAdd;
+
+                await _appDbContext.SaveChangesAsync();
+            }
         }
 
 	public async Task DeleteCustomerAsync(int customerId)

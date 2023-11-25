@@ -34,16 +34,24 @@ namespace RestaurantProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateCustomer(Customer customer)
-        {
-            return null;
-            //return View();
-        }
-
-        [HttpPost]
         public async Task<IActionResult> DeleteCustomer(Customer customer)
         {
             return null;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateCustomer(int id)
+        {
+            var customers = await _customers.GetCustomersAsync();
+            var customer = customers.Where(x => x.Id == id).FirstOrDefault();
+            return View(customer);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCustomer(Customer customer)
+        {
+            await _customers.UpdateCustomerAsync(customer);
+            return RedirectToAction("CustomerView");
         }
     }
 }
