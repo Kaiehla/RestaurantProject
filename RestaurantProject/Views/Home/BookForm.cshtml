@@ -22,21 +22,19 @@
                     <div>
                         <h6 class="my-0">Reservation Date</h6>
                             <input class="form-control" id="datepicker" placeholder="July 10, 2023" value="" required asp-for="ReservationDate">
-                        @*<small class="text-muted">July 10, 2023</small>*@
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Reservation Time</h6>
                             <input class="form-control" id="timepicker" placeholder="10:30PM" value="" required asp-for="ReservationTime">
-                        @*<small class="text-muted">10:30PM</small>*@
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Chosen Package</h6>
+                        @*Imbis na input type=number radio buttons nalang kaya?*@
                             <input type="number" class="form-control" id="packageId" placeholder=@packageId value=@packageId required asp-for="PackageId" />
-                        @*<small class="text-muted">Package @packageId</small>*@
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
