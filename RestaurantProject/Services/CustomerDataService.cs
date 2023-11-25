@@ -2,12 +2,12 @@
 using RestaurantProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantProject.Controllers;
 
 namespace RestaurantProject.Services
 {
     public class CustomerDataService : ICustomerDataService
     {
-        private List<Customer> _cusotmer;
         private AppDbContext _appDbContext;
 
         public CustomerDataService(AppDbContext appDbContext)
@@ -17,8 +17,13 @@ namespace RestaurantProject.Services
 
         public async Task<List<Customer>> GetCustomersAsync()
         {
-            var customers = await _appDbContext.Customer.ToListAsync();
-            return customers;
+            return await _appDbContext.Customer.ToListAsync();
+		}
+
+        public async Task<Customer> GetSingleCustomerAsync(int id)
+        {
+            var singleCustomer = await _appDbContext.Customer.Where(x => x.Id == id).FirstAsync();
+            return singleCustomer;
         }
 
         public async Task AddCustomerAsync(ReserveForm reservation)

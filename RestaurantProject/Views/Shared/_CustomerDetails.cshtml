@@ -1,0 +1,46 @@
+﻿@model Customer
+
+@*<div>
+	<span class="d-inline-block">First Name: </span><span>@Model.FirstName</span>
+</div>
+<div>
+	<span class="d-inline-block">Last Name: </span><span>@Model.LastName</span>
+</div>
+<div>
+	<span class="d-inline-block">Email: </span><span>@Model.Email</span>
+</div>
+<div>
+	<span class="d-inline-block">Phone Number: </span><span>@Model.PhoneNumber</span>
+</div>
+<div>
+	<span class="d-inline-block">City Address: </span><span>@Model.CityAdd</span>
+</div>*@
+
+<div class="row mt-2">
+    <div class="col-6">
+        <label for="firstName" class="form-label">First name</label>
+        <input type="text" class="form-control" id="firstName" value="@Model.FirstName" required="" asp-for="FirstName">
+    </div>
+
+    <div class="col-6">
+        <label for="lastName" class="form-label">Last name</label>
+        <input type="text" class="form-control" id="lastName" value="@Model.LastName" required="" asp-for="LastName">
+    </div>
+
+    <div class="col-6 mt-2">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" class="form-control" id="phone" value="@Model.PhoneNumber" required="" asp-for="PhoneNumber">
+    </div>
+
+    <div class="col-6 mt-2">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" value="@Model.Email" required="" asp-for="Email">
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        <label for="cityAdd" class="form-label">City Address</label>
+        <input type="text" class="form-control" id="cityAdd" value="@Model.CityAdd" required="" asp-for="CityAdd">
+    </div>
+</div>
