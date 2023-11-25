@@ -50,5 +50,16 @@ namespace RestaurantProject.Services
         {
             return null;
         }
+
+	public async Task DeleteCustomerAsync(int customerId)
+	 {
+		var customer = await _appDbContext.Customer.FindAsync(customerId);
+	
+	     if (customer != null)
+	     {
+	         _appDbContext.Customer.Remove(customer);
+	         await _appDbContext.SaveChangesAsync();
+	     }
+	 }
     }
 }
