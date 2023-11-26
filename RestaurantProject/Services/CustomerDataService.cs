@@ -45,23 +45,48 @@ namespace RestaurantProject.Services
             //    CustomerId = entryCustomer.Id,
 
             //    PackageId = reservation.PackageId,
-
-
-        
+        }
 
 	    public async Task DeleteCustomerAsync(int customerId)
 	     {
             //Find the row in the customer table and Reservation table that has the given customerId
 		    var customer = await _appDbContext.Customer.FindAsync(customerId);
-            var reservation = await _appDbContext.Reservation.Where(x => x.CustomerId == customerId).FirstAsync();
-	
-	         if (customer != null)
-	         {
-                //Remove the row starting from Reservation table to avoid an SQL error
-                _appDbContext.Reservation.Remove(reservation);
-	            _appDbContext.Customer.Remove(customer);
-	             await _appDbContext.SaveChangesAsync();
-	         }
+
+            try
+            {
+                var reservation = await _appDbContext.Reservation.Where(x => x.CustomerId == customerId).FirstAsync();
+	             if (customer != null)
+	             {
+                    //Remove the row starting from Reservation table to avoid an SQL error
+                    _appDbContext.Reservation.Remove(reservation);
+	                _appDbContext.Customer.Remove(customer);
+	                 await _appDbContext.SaveChangesAsync();
+	             }
+            }
+            catch (InvalidOperationException)
+            {
+                if (customer != null)
+                {
+                    _appDbContext.Customer.Remove(customer);
+                    await _appDbContext.SaveChangesAsync();
+                }
+            }
 	     }
+
+        public async Task UpdateCustomerAsync(Customer customer)
+        {
+            var selectedCustomer = await _appDbContext.Customer.Where(x => x.Id == customer.Id).FirstOrDefaultAsync();
+
+            if (selectedCustomer != null)
+            {
+                selectedCustomer.FirstName = customer.FirstName;
+                selectedCustomer.LastName = customer.LastName;
+                selectedCustomer.PhoneNumber = customer.PhoneNumber;
+                selectedCustomer.Email = customer.Email;
+                selectedCustomer.CityAdd = customer.CityAdd;
+
+                await _appDbContext.SaveChangesAsync();
+            }
+        }
     }
 }

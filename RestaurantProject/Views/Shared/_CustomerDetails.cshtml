@@ -1,27 +1,7 @@
 ﻿@model Customer
 
-@*<div>
-	<span class="d-inline-block">First Name: </span><span>@Model.FirstName</span>
-</div>
-<div>
-	<span class="d-inline-block">Last Name: </span><span>@Model.LastName</span>
-</div>
-<div>
-	<span class="d-inline-block">Email: </span><span>@Model.Email</span>
-</div>
-<div>
-	<span class="d-inline-block">Phone Number: </span><span>@Model.PhoneNumber</span>
-</div>
-<div>
-	<span class="d-inline-block">City Address: </span><span>@Model.CityAdd</span>
-</div>*@
-
 <div class="row mt-2">
-
-    <div class="col-6 mt-2">
-        <label for="id" class="form-label">ID</label>
-        <input type="text" class="form-control" id="id" value="@Model.Id" required="" asp-for="Id" readonly>
-    </div>
+     <input type="hidden" id="id" value="@Model.Id" asp-for="Id">
 
     <div class="col-6 mt-2">
         <label for="firstName" class="form-label">First name</label>
