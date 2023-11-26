@@ -17,12 +17,18 @@
 </div>*@
 
 <div class="row mt-2">
-    <div class="col-6">
+
+    <div class="col-6 mt-2">
+        <label for="id" class="form-label">ID</label>
+        <input type="text" class="form-control" id="id" value="@Model.Id" required="" asp-for="Id" readonly>
+    </div>
+
+    <div class="col-6 mt-2">
         <label for="firstName" class="form-label">First name</label>
         <input type="text" class="form-control" id="firstName" value="@Model.FirstName" required="" asp-for="FirstName">
     </div>
 
-    <div class="col-6">
+    <div class="col-6 mt-2">
         <label for="lastName" class="form-label">Last name</label>
         <input type="text" class="form-control" id="lastName" value="@Model.LastName" required="" asp-for="LastName">
     </div>
@@ -32,10 +38,11 @@
         <input type="text" class="form-control" id="phone" value="@Model.PhoneNumber" required="" asp-for="PhoneNumber">
     </div>
 
-    <div class="col-6 mt-2">
+    <div class="col-12 mt-2">
         <label for="email" class="form-label">Email</label>
         <input type="text" class="form-control" id="email" value="@Model.Email" required="" asp-for="Email">
     </div>
+
 </div>
 
 <div class="row mt-2">

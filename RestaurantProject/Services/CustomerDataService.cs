@@ -1,4 +1,4 @@
-﻿using RestaurantProject.Data;
+using RestaurantProject.Data;
 using RestaurantProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -47,13 +47,7 @@ namespace RestaurantProject.Services
             //    PackageId = reservation.PackageId,
 
 
-            //}
-        }
-
-        public async Task<List<Customer>> UpdateCustomerAsync(Customer customer)
-        {
-            return null;
-        }
+        
 
 	    public async Task DeleteCustomerAsync(int customerId)
 	     {

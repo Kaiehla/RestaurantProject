@@ -33,11 +33,12 @@ namespace RestaurantProject.Controllers
             return PartialView("_CustomerDetailsViewOnly", await _customers.GetSingleCustomerAsync(id));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> UpdateCustomer(Customer customer)
+        [HttpGet]
+        public async Task<IActionResult> UpdateCustomer(int id)
         {
-            return null;
-            //return View();
+            var customers = await _customers.GetCustomersAsync();
+            var customer = customers.Where(x => x.Id == id).FirstOrDefault();
+            return View(customer);
         }
 
         [HttpPost]
