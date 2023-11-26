@@ -28,7 +28,7 @@ namespace RestaurantProject.Services
 
         public async Task AddCustomerAsync(ReserveForm reservation)
         {
-            var entry = new Customer
+            var entryCustomer = new Customer
             {
                 FirstName = reservation.FirstName,
                 LastName = reservation.LastName,
@@ -37,13 +37,17 @@ namespace RestaurantProject.Services
                 CityAdd = reservation.CityAdd
             };
 
-            await _appDbContext.Customer.AddAsync(entry);
+            await _appDbContext.Customer.AddAsync(entryCustomer);
             await _appDbContext.SaveChangesAsync();
-        }
 
-        public async Task<List<Customer>> DeleteCustomerAsync(Customer customer)
-        {
-            return null;
+            //var entryReservation = new Reservation
+            //{
+            //    CustomerId = entryCustomer.Id,
+
+            //    PackageId = reservation.PackageId,
+
+
+            //}
         }
 
         public async Task<List<Customer>> UpdateCustomerAsync(Customer customer)
@@ -51,15 +55,19 @@ namespace RestaurantProject.Services
             return null;
         }
 
-	public async Task DeleteCustomerAsync(int customerId)
-	 {
-		var customer = await _appDbContext.Customer.FindAsync(customerId);
-	
-	     if (customer != null)
+	    public async Task DeleteCustomerAsync(int customerId)
 	     {
-	         _appDbContext.Customer.Remove(customer);
-	         await _appDbContext.SaveChangesAsync();
+            //Find the row in the customer table and Reservation table that has the given customerId
+		    var customer = await _appDbContext.Customer.FindAsync(customerId);
+            var reservation = await _appDbContext.Reservation.Where(x => x.CustomerId == customerId).FirstAsync();
+	
+	         if (customer != null)
+	         {
+                //Remove the row starting from Reservation table to avoid an SQL error
+                _appDbContext.Reservation.Remove(reservation);
+	            _appDbContext.Customer.Remove(customer);
+	             await _appDbContext.SaveChangesAsync();
+	         }
 	     }
-	 }
     }
 }

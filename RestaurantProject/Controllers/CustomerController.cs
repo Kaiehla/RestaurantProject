@@ -41,9 +41,10 @@ namespace RestaurantProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteCustomer(Customer customer)
+        public async Task<IActionResult> DeleteCustomer(int customerId)
         {
-            return null;
+            await _customers.DeleteCustomerAsync(customerId);
+            return RedirectToAction("CustomerView");
         }
     }
 }

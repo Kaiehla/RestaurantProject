@@ -63,12 +63,5 @@ namespace RestaurantProject.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteCustomer(int customerId)
-        {
-            await _customer.DeleteCustomerAsync(customerId);
-            return RedirectToAction("CustomerView");
-        }
     }
 }
