@@ -1,0 +1,31 @@
+﻿@model Customer
+
+<div class="row mt-2">
+    <input type="hidden" value="@Model.Id" name="customerId" />
+    <div class="col-6">
+        <label for="firstName" class="form-label">First name</label>
+        <input type="text" disabled="disabled" class="form-control" id="firstName" value="@Model.FirstName">
+    </div>
+
+    <div class="col-6">
+        <label for="lastName" class="form-label">Last name</label>
+        <input type="text" disabled="disabled" class="form-control" id="lastName" value="@Model.LastName">
+    </div>
+
+    <div class="col-6 mt-2">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" disabled="disabled" class="form-control" id="phone" value="@Model.PhoneNumber">
+    </div>
+
+    <div class="col-6 mt-2">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" disabled="disabled" class="form-control" id="email" value="@Model.Email">
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        <label for="cityAdd" class="form-label">City Address</label>
+        <input type="text" disabled="disabled" class="form-control" id="cityAdd" value="@Model.CityAdd">
+    </div>
+</div>

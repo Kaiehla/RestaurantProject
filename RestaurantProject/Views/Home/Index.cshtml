@@ -27,7 +27,11 @@
                            <li>Shin Remyun (250g)</li>
                        </ul>
                    </div>
-                    <a class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#bookTable">Book Now</a>
+                    @*<a class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#bookTable">Book Now</a>*@
+                    <form asp-action="BookForm" method="get">
+                        <input type="hidden" name="packageId" value="1" />
+                        <button class="btn btn-primary ms-3">Book Now</button>
+                    </form>
                     
                 </div>
                 @* END OF THIRD COLUMN *@
@@ -61,7 +65,10 @@
                             <li>Shin Remyun (250g)</li>
                         </ul>
                     </div>
-                    <a class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#bookTable">Book Now</a>
+                    <form asp-action="BookForm" method="get">
+                        <input type="hidden" name="packageId" value="2" />
+                        <button id="test" class="btn btn-primary ms-3">Book Now</button>
+                    </form>
                 </div>
                 @* END OF THIRD COLUMN *@
             </div>
@@ -94,7 +101,10 @@
                             <li>Shin Remyun (250g)</li>
                         </ul>
                     </div>
-                    <a class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#bookTable">Book Now</a>
+                    <form asp-action="BookForm" method="get">
+                        <input type="hidden" name="packageId" value="3" />
+                        <button class="btn btn-primary ms-3">Book Now</button>
+                    </form>
                 </div>
                 @* END OF THIRD COLUMN *@
             </div>
@@ -156,4 +166,4 @@
 
 
 </div>
-
+}

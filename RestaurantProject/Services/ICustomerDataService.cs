@@ -5,8 +5,9 @@ namespace RestaurantProject.Services
     public interface ICustomerDataService
     {
         Task<List<Customer>> GetCustomersAsync();
-        Task<List<Customer>> AddCustomerAsync(Customer customer);
-        Task<List<Customer>> DeleteCustomerAsync(Customer customer);
-        Task<List<Customer>> UpdateCustomerAsync(Customer customer);
+        Task<Customer> GetSingleCustomerAsync(int id);
+        Task AddCustomerAsync(ReserveForm reserve);
+        Task DeleteCustomerAsync(int customerId);
+        Task UpdateCustomerAsync(Customer customer);
     }
 }

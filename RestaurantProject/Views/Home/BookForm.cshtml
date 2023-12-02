@@ -1,5 +1,7 @@
-﻿@{
+﻿@model ReserveForm
+@{
     ViewData["Title"] = "Book Form";
+    var packageId = ViewData["PackageId"];
 }
 
 
@@ -9,7 +11,7 @@
         <p class="lead">This is the reservation form</p>
     </div>
 
-   
+    <form class="needs-validation" method="post" asp-action="SubmitReservation">
     <div class="row g-5">
         <div class="col-md-5 col-lg-4 order-md-last">
             <h5 class="d-flex justify-content-between align-items-center mb-3">
@@ -19,37 +21,37 @@
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Reservation Date</h6>
-                        <small class="text-muted">July 10, 2023</small>
+                            <input class="form-control" id="datepicker" placeholder="July 10, 2023" value="" required asp-for="ReservationDate">
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Reservation Time</h6>
-                        <small class="text-muted">10:30PM</small>
+                            <input class="form-control" id="timepicker" placeholder="10:30PM" value="" required asp-for="ReservationTime">
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Chosen Package</h6>
-                        <small class="text-muted">Package 1</small>
+                        @*Imbis na input type=number radio buttons nalang kaya?*@
+                            <input type="number" class="form-control" id="packageId" placeholder=@packageId value=@packageId required asp-for="PackageId" />
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Number of Guest</h6>
+                            <input type="number" class="form-control" id="numGuest" placeholder="2" value="" required asp-for="NumOfGuest" />
                     </div>
-                    <span class="text-dark">2</span>
                 </li>
             </ul>
 
         </div>
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Client details</h4>
-            <form class="needs-validation" novalidate="">
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="firstName" class="form-label">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Juan" value="" required="">
+                        <input type="text" class="form-control" id="firstName" placeholder="Juan" value="" required asp-for="FirstName">
                         <div class="invalid-feedback">
                             Valid first name is required.
                         </div>
@@ -57,7 +59,7 @@
 
                     <div class="col-sm-6">
                         <label for="lastName" class="form-label">Last name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Dimagiba" value="" required="">
+                        <input type="text" class="form-control" id="lastName" placeholder="Dimagiba" value="" required asp-for="LastName">
                         <div class="invalid-feedback">
                             Valid last name is required.
                         </div>
@@ -66,7 +68,7 @@
 
                     <div class="col-12">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                        <input type="email" class="form-control" id="email" placeholder="you@example.com" required asp-for="Email">
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -74,7 +76,7 @@
 
                     <div class="col-12">
                         <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required asp-for="CityAdd">
                         <div class="invalid-feedback">
                             Please enter your city address.
                         </div>
@@ -82,21 +84,21 @@
 
                     <div class="col-12">
                         <label for="number" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="number" placeholder="091234567891" required="">
+                        <input type="text" class="form-control" id="number" placeholder="091234567891" required asp-for="PhoneNumber">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
                     </div>
                 </div>
-                <br>
-                <button class="w-100 btn btn-primary btn-lg mb-5" type="submit">Continue to checkout</button>
-                <br/>
-                <br />
-                <br />
-                <br />
-            </form>
+            <br>
+            <button class="w-100 btn btn-primary btn-lg mb-5" type="submit">Continue to checkout</button>
+            <br/>
+            <br />
+            <br />
+            <br />
         </div>
     </div>
+    </form>
 </div>
 
 

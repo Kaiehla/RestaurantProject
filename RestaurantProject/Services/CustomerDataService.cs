@@ -1,13 +1,13 @@
-﻿using RestaurantProject.Data;
+using RestaurantProject.Data;
 using RestaurantProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantProject.Controllers;
 
 namespace RestaurantProject.Services
 {
     public class CustomerDataService : ICustomerDataService
     {
-        private List<Customer> _cusotmer;
         private AppDbContext _appDbContext;
 
         public CustomerDataService(AppDbContext appDbContext)
@@ -17,23 +17,76 @@ namespace RestaurantProject.Services
 
         public async Task<List<Customer>> GetCustomersAsync()
         {
-            var customers = await _appDbContext.Customer.ToListAsync();
-            return customers;
+            return await _appDbContext.Customer.ToListAsync();
+		}
+
+        public async Task<Customer> GetSingleCustomerAsync(int id)
+        {
+            var singleCustomer = await _appDbContext.Customer.Where(x => x.Id == id).FirstAsync();
+            return singleCustomer;
         }
 
-        public async Task<List<Customer>> AddCustomerAsync(Customer customer)
+        public async Task AddCustomerAsync(ReserveForm reservation)
         {
-            return null;
+            var entryCustomer = new Customer
+            {
+                FirstName = reservation.FirstName,
+                LastName = reservation.LastName,
+                Email = reservation.Email,
+                PhoneNumber = reservation.PhoneNumber,
+                CityAdd = reservation.CityAdd
+            };
+
+            await _appDbContext.Customer.AddAsync(entryCustomer);
+            await _appDbContext.SaveChangesAsync();
+
+            //var entryReservation = new Reservation
+            //{
+            //    CustomerId = entryCustomer.Id,
+
+            //    PackageId = reservation.PackageId,
         }
 
-        public async Task<List<Customer>> DeleteCustomerAsync(Customer customer)
-        {
-            return null;
-        }
+	    public async Task DeleteCustomerAsync(int customerId)
+	     {
+            //Find the row in the customer table and Reservation table that has the given customerId
+		    var customer = await _appDbContext.Customer.FindAsync(customerId);
 
-        public async Task<List<Customer>> UpdateCustomerAsync(Customer customer)
+            try
+            {
+                var reservation = await _appDbContext.Reservation.Where(x => x.CustomerId == customerId).FirstAsync();
+	             if (customer != null)
+	             {
+                    //Remove the row starting from Reservation table to avoid an SQL error
+                    _appDbContext.Reservation.Remove(reservation);
+	                _appDbContext.Customer.Remove(customer);
+	                 await _appDbContext.SaveChangesAsync();
+	             }
+            }
+            catch (InvalidOperationException)
+            {
+                if (customer != null)
+                {
+                    _appDbContext.Customer.Remove(customer);
+                    await _appDbContext.SaveChangesAsync();
+                }
+            }
+	     }
+
+        public async Task UpdateCustomerAsync(Customer customer)
         {
-            return null;
+            var selectedCustomer = await _appDbContext.Customer.Where(x => x.Id == customer.Id).FirstOrDefaultAsync();
+
+            if (selectedCustomer != null)
+            {
+                selectedCustomer.FirstName = customer.FirstName;
+                selectedCustomer.LastName = customer.LastName;
+                selectedCustomer.PhoneNumber = customer.PhoneNumber;
+                selectedCustomer.Email = customer.Email;
+                selectedCustomer.CityAdd = customer.CityAdd;
+
+                await _appDbContext.SaveChangesAsync();
+            }
         }
     }
 }
