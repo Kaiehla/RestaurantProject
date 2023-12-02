@@ -21,10 +21,10 @@
 @*     DITO YUNG MGA STATICS BETWEEN PAGES *@
     <!-- Navbar -->
     <header>
-        <div class="nav-bar">
+        <div class="nav-bar bg-dark">
             <div class="text-white d-md-block">
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/lib/logo_white.svg" width="300" height="180" class="mt-5"/>
+                    <img src="~/lib/logo_white.svg" width="120" height="120"/>
                 </a>
             </div>
         </div>
@@ -32,6 +32,7 @@
        @* NAVIGATION BAR ENDS *@
 
     <div>
+        <div style="margin-top:100px;"></div>
         <main role="main">
             @RenderBody()
         </main>
@@ -41,10 +42,10 @@
     <br />
     <br />
 
-   @* START OF FOOTER *@
+    @* START OF FOOTER *@
     <footer class="border-top footer text-muted mt-5">
         <div class="container">
-            &copy; 2023 - RestaurantProject 
+            &copy; 2023 - RestaurantProject
             - <a asp-area="" asp-controller="Home" asp-action="BookForm" class="text-dark text-decoration-none">BookForm</a>
             - <a asp-area="" asp-controller="Reservation" asp-action="ReserveView" class="text-dark text-decoration-none">Reservation</a>
             - <a asp-area="" asp-controller="Customer" asp-action="CustomerView" class="text-dark text-decoration-none">Customer</a>
@@ -53,6 +54,7 @@
         </div>
 
     </footer>
+    @* END OF FOOTER *@
     @* END OF FOOTER *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

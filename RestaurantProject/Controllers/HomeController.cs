@@ -58,6 +58,11 @@ namespace RestaurantProject.Controllers
             return View();
         }
 
+        public IActionResult ConfirmBook()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Confirmation";
+    var packageId = ViewData["PackageId"];
+}
+@{
+    Layout = "_Layout-Filled";
+}
+
+<div class="container">
+    <div class="py-3 text-center">
+        <i class="bi-calendar2-check-fill" style="font-size: 7rem;"></i>
+        <h2>Reservation Confirmation</h2>
+        <p class="lead">Below is your reservation details</p>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-4">
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0 text-success fw-bold">Status</h6>
+                    </div>
+                    <strong class="text-success">Confirmed</strong>
+
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Date</h6>
+                    </div>
+                    <span class="text-muted">12-10-23</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Time</h6>
+                    </div>
+                    <span class="text-muted">10:00PM</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Number of Guest</h6>
+                    </div>
+                    <span class="text-muted">4</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Name</h6>
+                    </div>
+                    <span class="text-muted">Kaiehla</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Email</h6>
+                    </div>
+                    <span class="text-muted">kai@gmail.com</span>
+                </li>
+            </ul>
+            <div class="d-grid gap-2">
+                <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="Index">Back to Home</a>
+            </div>
+        </div>
+    </div>
+    
+</div>

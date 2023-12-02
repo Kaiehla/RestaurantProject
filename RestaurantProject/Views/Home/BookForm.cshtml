@@ -3,6 +3,9 @@
     ViewData["Title"] = "Book Form";
     var packageId = ViewData["PackageId"];
 }
+@{
+    Layout = "_Layout-Filled";
+}
 
 
 <div class="container">
@@ -91,7 +94,7 @@
                     </div>
                 </div>
             <br>
-            <button class="w-100 btn btn-primary btn-lg mb-5" type="submit">Continue to checkout</button>
+            <button class="w-100 btn btn-dark btn-lg mb-5" type="submit" asp-action="ConfirmBook">Continue to checkout</button>
             <br/>
             <br />
             <br />
