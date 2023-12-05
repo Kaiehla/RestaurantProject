@@ -13,7 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IReservationDataService, ReservationDataService>();
 builder.Services.AddScoped<ICustomerDataService, CustomerDataService>();
-builder.Services.AddScoped<IRestoTableDataService, RestoTableDataService>();
+builder.Services.AddScoped<IRestaurantTableDataService, RestaurantTableDataService>();
 builder.Services.AddScoped<IPackageMenuDataService, PackageMenuDataService>();
 
 var app = builder.Build();

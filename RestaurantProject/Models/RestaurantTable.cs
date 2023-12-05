@@ -2,8 +2,8 @@
 
 namespace RestaurantProject.Models
 {
-    [Table("RestoTable")]
-    public class RestoTable
+    [Table("RestaurantTable")]
+    public class RestaurantTable
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 

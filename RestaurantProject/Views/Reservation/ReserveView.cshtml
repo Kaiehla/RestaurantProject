@@ -36,10 +36,10 @@
                     {
                         <tr>
                             <th scope="row">@count</th>
-                            <td>@data.Reservation.ReserveId</td>
-                            <td>@data.RestoTable.TableName</td>
+                            <td>@data.Reservation.Id</td>
+                            <td>@data.RestaurantTable.TableName</td>
                             <td><a>@data.Customer.FirstName @data.Customer.LastName</a></td>@*CustomerId muna pero dapat Customer Name yan*@
-                            <td>@data.Package_Menu.PackageName</td>
+                            <td>@data.PackageMenu.PackageName</td>
                             <td>@data.Reservation.ReservationDate.ToShortDateString()</td>
                             <td>@data.Reservation.ReservationTime</td>@*Ayusin yung formatting*@
                             <td>@data.Customer.PhoneNumber</td>

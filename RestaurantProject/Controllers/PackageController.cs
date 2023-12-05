@@ -15,7 +15,7 @@ namespace RestaurantProject.Controllers
 
         public async Task<IActionResult> PackageView()
         {
-            var packageMenu = await _packageMenu.GetPackage_MenusAsync();
+            var packageMenu = await _packageMenu.GetPackageMenusAsync();
             return View(packageMenu);
         }
 

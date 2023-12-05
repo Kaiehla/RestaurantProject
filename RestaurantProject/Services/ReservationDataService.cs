@@ -20,21 +20,21 @@ namespace RestaurantProject.Services
             var reservationsExtra = new List<ReservationExtra>();
             var reservations = await _appDbContext.Reservation.ToListAsync();
             var customers = await _appDbContext.Customer.ToListAsync();
-            var packageMenus = await _appDbContext.Package_Menu.ToListAsync();
-            var restoTables = await _appDbContext.RestoTable.ToListAsync();
+            var packageMenus = await _appDbContext.PackageMenu.ToListAsync();
+            var restaurantTables = await _appDbContext.RestaurantTable.ToListAsync();
 
             foreach (var reservation in reservations)
             {
                 var customer = customers.Where(x => x.Id == reservation.CustomerId).FirstOrDefault();
                 var packageMenu = packageMenus.Where(x => x.Id == reservation.PackageId).FirstOrDefault();
-                var restoTable = restoTables.Where(x => x.Id == reservation.TablesId).FirstOrDefault();
+                var restaurantTable = restaurantTables.Where(x => x.Id == reservation.TablesId).FirstOrDefault();
 
                 reservationsExtra.Add(new ReservationExtra
                 {
                     Reservation = reservation,
                     Customer = customer,
-                    Package_Menu = packageMenu,
-                    RestoTable = restoTable
+                    PackageMenu = packageMenu,
+                    RestaurantTable = restaurantTable
                 });
             }
 
@@ -52,7 +52,7 @@ namespace RestaurantProject.Services
 
         public async Task<Reservation> DeleteReservationAsync(Reservation model)
         {
-            var reservation  = await _appDbContext.Reservation.FindAsync(model.ReserveId);
+            var reservation  = await _appDbContext.Reservation.FindAsync(model.Id);
 
             if (reservation != null)
             {

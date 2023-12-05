@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestaurantProject.Models
 {
-    [Table("Package_Menu")]
-    public class Package_Menu
+    [Table("PackageMenu")]
+    public class PackageMenu
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 

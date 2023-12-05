@@ -6,16 +6,16 @@ namespace RestaurantProject.Controllers
 {
     public class TableController : Controller
     {
-        private IRestoTableDataService _restoTable;
+        private IRestaurantTableDataService _restoTable;
 
-        public TableController(IRestoTableDataService restoTable)
+        public TableController(IRestaurantTableDataService restoTable)
         {
             _restoTable = restoTable;
         }
 
         public async Task<IActionResult> TableView()
         {
-            var restoTables = await _restoTable.GetRestoTablesAsync();
+            var restoTables = await _restoTable.GetRestaurantTablesAsync();
             return View(restoTables);
         }
     }

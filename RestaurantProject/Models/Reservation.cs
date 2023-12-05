@@ -10,19 +10,19 @@ namespace RestaurantProject.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
         [Key]
-        public int ReserveId { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 
-        [ForeignKey("RestoTable")]
+        [ForeignKey("RestaurantTable")]
         public int TablesId { get; set; }
-        public virtual RestoTable RestoTable { get; set; }
+        public virtual RestaurantTable RestaurantTable { get; set; }
 
-        [ForeignKey("Package_Menu")]
+        [ForeignKey("PackageMenu")]
         public int PackageId { get; set; }
-        public virtual Package_Menu Package_Menu { get; set; }
+        public virtual PackageMenu PackageMenu { get; set; }
 
         public DateTime ReservationDate { get; set; }
         public TimeSpan ReservationTime { get; set; }

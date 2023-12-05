@@ -4,7 +4,7 @@
     {
         public Reservation Reservation { get; set; }
         public Customer Customer { get; set; }
-        public Package_Menu Package_Menu { get; set; }
-        public RestoTable RestoTable { get; set; }
+        public PackageMenu PackageMenu { get; set; }
+        public RestaurantTable RestaurantTable { get; set; }
     }
 }

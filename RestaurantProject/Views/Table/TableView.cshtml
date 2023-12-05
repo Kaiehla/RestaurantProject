@@ -1,4 +1,4 @@
-﻿@model List<RestoTable>
+﻿@model List<RestaurantTable>
 @{
     ViewData["Title"] = "Table View";
 }@{
@@ -34,7 +34,7 @@
                                 <td>@data.TableName</td>
                                 <td class="text-center">@data.SeatingCapacity</td>
                                 @{
-                                    if (data.Availability == "Available")
+                                    if (data.Availability == "Free")
                                     {
                                         <td class="text-center"><span class="badge rounded-pill text-bg-success bg-success">@data.Availability</span></td>
                                     }
