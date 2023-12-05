@@ -8,5 +8,7 @@ namespace RestaurantProject.Services
         Task<List<PackageMenu>> AddPackageMenuAsync(PackageMenu packageMenu);
         Task<List<PackageMenu>> UpdatePackageMenuAsync(PackageMenu packageMenu);
         Task<List<PackageMenu>> DeletePackageMenuAsync(PackageMenu packageMenu);
+        Task<List<PackageFullDetails>> GetPackageFullDetailsAsync();
+        Task<Tuple<List<PackageMenu>, List<PackageItems>>> GetMenuAndDetailsAsync();
     }
 }

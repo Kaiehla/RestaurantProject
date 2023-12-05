@@ -39,5 +39,37 @@ namespace RestaurantProject.Services
             return null;
         }
 
+        public async Task<List<PackageFullDetails>> GetPackageFullDetailsAsync()
+        {
+            var asd = await _appDbContext.PackageMenu.ToListAsync();
+
+            var packageFullDetails = await (from pi in _appDbContext.PackageItems
+                                            join pm in _appDbContext.PackageMenu
+                                            on pi.PackageId equals pm.Id
+                                            select new PackageFullDetails()
+                                            {
+                                                PackageMenuId = pm.Id,
+                                                PackageName = pm.PackageName,
+                                                PackageDescription = pm.PackageDescription,
+                                                PackageItem = pi.Item,
+                                                ImageLink = pm.ImageLink,
+                                                Price = pm.Price,
+                                                Duration = pm.Duration,
+                                                RecommendedNumber = pm.RecommendedNumber
+                                            }).ToListAsync();
+
+            return packageFullDetails;
+        }
+
+        public async Task<Tuple<List<PackageMenu>, List<PackageItems>>> GetMenuAndDetailsAsync()
+        {
+            var packageMenu = await _appDbContext.PackageMenu.ToListAsync();
+            var packageItems = await _appDbContext.PackageItems.ToListAsync();
+
+            var tuple = new Tuple<List<PackageMenu>, List<PackageItems>>(packageMenu, packageItems);
+
+            return tuple;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Tuple<List<PackageMenu>, List<PackageItems>>
+@{
     ViewData["Title"] = "Home Page";
 }
 <div class="d-flex text-center text-light" style="background-color: #0021ac">
@@ -15,316 +16,99 @@
 </div>
 
 <!--CARDS - PACKAGES-->
-<!--ROW 1-->
-<div class="container">
-    <h1 id="Package" class="text-center fw-bolder mb-4 mt-5">Packages</h1>
-    <div class="row">
-        <!--Package 1-->
-        <div class="col-md-3">
-            <div class="card mt-5 text-center" style="width: 18rem;">
-                <img src="https://shop.soban.ph/cdn/shop/products/GRAB750x750px_FFSET4_9123_900x.png?v=1662964363" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Favorite Feast BBQ Set</h5>
-                    <h6 class="card-subtitle mt-2">Good for 4 persons</h6>
-                    <p class="card-text fw-bold">₱3,530.00</p>
-                    <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
-                </div>
-            </div>
-        </div>
+@{
+    var j = 0;
+    var col = 4; //Defines how many columns, the number of rows will be decided automatically. Changing this may or may not actually change the columns reliably due to the implementation of the HTML code
+}
+@for(int i = 0; i <= Math.Ceiling(Convert.ToDecimal(Model.Item1.Count / col)); i++)
+{
+    <div class="container">
+        @if(i == 0)
+        {
+            <h1 id="Package" class="text-center fw-bolder mb-4 mt-5">Packages</h1>
+        }
 
-        <!--Package 2-->
-        <div class="col-md-3">
-            <div class="card mt-5 text-center" style="width: 18rem;">
-                <img src="https://shop.soban.ph/cdn/shop/products/WEB_650x650px_MEGAMEATSET2EDITED_70121e0e-60c0-4c06-8f25-cbd1be25444e_900x.png?v=1616672672" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Mega Meat BBQ Set</h5>
-                    <h6 class="card-subtitle mt-2">Good for 4 persons</h6>
-                    <p class="card-text fw-bold">₱2,900.00</p>
-                    <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
+        <!--ROWS-->
+        <div class="row">
+        <!--Loop through PackageMenu-->
+        @while(j < Model.Item1.Count)
+        {
+            <div class="col-md-3">
+                <div class="card mt-5 text-center" style="width: 18rem;">
+                    <img src="@Model.Item1[j].ImageLink" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.Item1[j].PackageName</h5>
+                        <h6 class="card-subtitle mt-2">@Model.Item1[j].PackageDescription</h6>
+                        <h6 class="card-subtitle mt-2">Good for @Model.Item1[j].Duration hours</h6>
+                        <p class="card-text fw-bold">@String.Format(new CultureInfo("fil-PH"), "{0:C2}", Model.Item1[j].Price)</p>
+                        <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!--Package 3-->
-        <div class="col-md-3">
-            <div class="card mt-5 text-center" style="width: 18rem;">
-                <img src="https://shop.soban.ph/cdn/shop/products/GRAB_750x750px_ALLBEEF_SETFOR4_1_900x.jpg?v=1635511524" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Beef Mega Meat BBQ Set</h5>
-                    <h6 class="card-subtitle mt-2">Good for 4 persons</h6>
-                    <p class="card-text fw-bold">₱3,250.00</p>
-                    <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
-                </div>
-            </div>
-        </div>
-
-        <!--Package 4-->
-        <div class="col-md-3">
-            <div class="card mt-5 text-center" style="width: 18rem;">
-                <img src="https://shop.soban.ph/cdn/shop/products/GRAB_750x750px_6FLAVORSAMGYUPSAL_900x.png?v=1655968473" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Pork Mega Meat Set</h5>
-                    <h6 class="card-subtitle mt-2">Good for 2 persons</h6>
-                    <p class="card-text fw-bold">₱1,480.00</p>
-                    <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
-                </div>
-            </div>
+            //Go to the next row (in other words, break the while loop) when it reaches the max number of columns (Make sure to increment j first before break; so it goes to the next entry in the list)
+            //Otherwise, just increment normally without breaking
+            if((j + 1) % col == 0)
+            {
+                j++;
+                break;
+            }
+            j++;
+        }
         </div>
     </div>
-</div>
 
-
-<!-- ROW 2-->
-<div class="container">
-    <div class="row">
-        <!--Package 5-->
-        <div class="col-md-3">
-            <div class="card mt-5 text-center" style="width: 18rem;">
-                <img src="https://shop.sariwon.ph/cdn/shop/products/SARIWON-Sig-Set-4-Grab-1_1080x.png?v=1618469399" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Signature Grill Set</h5>
-                    <h6 class="card-subtitle mt-2">Good for 4 persons</h6>
-                    <p class="card-text fw-bold">₱6,335.00</p>
-                    <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
-                </div>
-            </div>
-        </div>
-
-        <!--Package 6-->
-        <div class="col-md-3">
-            <div class="card mt-5 text-center" style="width: 18rem;">
-                <img src="https://shop.sariwon.ph/cdn/shop/products/GRAB_750x750px_GALBIJIMSETFOR4_1080x.jpg?v=1678930598" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Galbi Jjim Grill Set</h5>
-                    <h6 class="card-subtitle mt-2">Good for 4 persons</h6>
-                    <p class="card-text fw-bold">₱5,920.00</p>
-                    <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
-                </div>
-            </div>
-        </div>
-
-        <!--Package 7-->
-        <div class="col-md-3">
-            <div class="card mt-5 text-center" style="width: 18rem;">
-                <img src="https://shop.sariwon.ph/cdn/shop/products/GRAB_750x750px_PREMIUMSETFOR2_900x.jpg?v=1678930666" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Premium Grill Set</h5>
-                    <h6 class="card-subtitle mt-2">Good for 2 persons</h6>
-                    <p class="card-text fw-bold">₱2,410.00</p>
-                    <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
-                </div>
-            </div>
-        </div>
-
-        <!--Package 8-->
-        <div class="col-md-3">
-            <div class="card mt-5 text-center" style="width: 18rem;">
-                <img src="https://shop.sariwon.ph/cdn/shop/products/sariwon-special-grill-set-for-4_1024x1024@2x.jpg?v=1591612454" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Special Grill Set</h5>
-                    <h6 class="card-subtitle mt-2">Good for 2 persons</h6>
-                    <p class="card-text fw-bold">₱3,345.00</p>
-                    <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+}
 
 <br><br /><hr>
 
 <!--Descriptions-->
 <h1 class="text-center fw-bolder my-5">Package Inclusions</h1>
-
+@{
+    j = 0;
+    col = 3; //Defines how many columns, the number of rows will be decided automatically. Changing this may or may not actually change the columns reliably due to the implementation of the HTML code
+}
 <div class="container">
-    <!--FIRST ROW-->
-    <div class="row mb-4">
-        <div class="col-sm-6">
-            <div class="card mb-3" style="max-width: 600px;">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <img src="https://shop.soban.ph/cdn/shop/products/GRAB750x750px_FFSET4_9123_900x.png?v=1662964363" class="img-fluid rounded-start" style="height: 100%;">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Favorite Feast BBQ Set</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">240g Beef Woo</li>
-                                <li class="list-group-item">240g Marinated Beef</li>
-                                <li class="list-group-item">240g Fresh Pork</li>
-                                <li class="list-group-item">Whole Pajeon and Gyeranjjim</li>
-                                <li class="list-group-item">1L Coke, 4 Rice, 6 Side Dishes</li>
-                            </ul>
+    @for (int i = 0; i <= Math.Ceiling(Convert.ToDecimal(Model.Item1.Count / col)); i++)
+    {
+        <!--ROWS-->
+        <div class="row mb-4">
+            <!--Loop through PackageMenu entries-->
+            @while (j < Model.Item1.Count)
+            {
+                <div class="col-sm-6">
+                    <div class="card mb-3" style="max-width: 600px;">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="@Model.Item1[j].ImageLink" class="img-fluid rounded-start" style="height: 100%;">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">@Model.Item1[j].PackageName</h5>
+                                    <ul class="list-group list-group-flush">
+                                        <!--Select the PackageItem entries where its PackageId is equal to the Id of the current PackageMenu entry in the while loop. Loop through these entires-->
+                                        @foreach(var package in Model.Item2.Where(p => p.PackageId == Model.Item1[j].Id))
+                                        {
+                                            <li class="list-group-item">@package.Item</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="col-sm-6">
-            <div class="card mb-3" style="max-width: 600px;">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <img src="https://shop.soban.ph/cdn/shop/products/WEB_650x650px_MEGAMEATSET2EDITED_70121e0e-60c0-4c06-8f25-cbd1be25444e_900x.png?v=1616672672" class="img-fluid rounded-start" style="height: 100%;">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Mega Meat BBQ Set</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">240g Fresh Woo</li>
-                                <li class="list-group-item">240g Soy Garlic Samgyup</li>
-                                <li class="list-group-item">240g Black Pepper Samgyup</li>
-                                <li class="list-group-item">180g Dak Galbi Spicy Chicken</li>
-                                <li class="list-group-item">Lettuce, 4 Rice, 6 Side Dishes</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                //Go to the next row (in other words, break the while loop) when it reaches the max number of columns (Make sure to increment j first before break; so it goes to the next entry in the list)
+                //Otherwise, just increment normally without breaking
+                if ((j + 1) % col == 0)
+                {
+                    j++;
+                    break;
+                }
+                j++;
+            }
         </div>
-    </div>
-
-    <!--SECOND ROW-->
-    <div class="row mb-4">
-        <div class="col-sm-6">
-            <div class="card mb-3" style="max-width: 600px;">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <img src="https://shop.soban.ph/cdn/shop/products/GRAB_750x750px_ALLBEEF_SETFOR4_1_900x.jpg?v=1635511524" class="img-fluid rounded-start" style="height: 100%;">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Beef Mega Meat BBQ Set</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">240g Fresh Beef</li>
-                                <li class="list-group-item">240g Marinated Beef</li>
-                                <li class="list-group-item">240g Beef Upjinsal</li>
-                                <li class="list-group-item">240g Dak Ganjeong</li>
-                                <li class="list-group-item">1L Iced Tea, 4 Rice, 6 Side Dishes</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6">
-            <div class="card mb-3" style="max-width: 600px;">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <img src="https://shop.soban.ph/cdn/shop/products/GRAB_750x750px_6FLAVORSAMGYUPSAL_900x.png?v=1655968473" class="img-fluid rounded-start" style="height: 100%;">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Pork Mega Meat Set</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">540g Pork Belly (6 Flavors)</li>
-                                <li class="list-group-item">540g  Fresh Pork Belly</li>
-                                <li class="list-group-item">1 Gyeranjjim</li>
-                                <li class="list-group-item">2 Rice, Lettuce</li>
-                                <li class="list-group-item">Sauces, 6 Side Dishes</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--THIRD ROW-->
-    <div class="row mb-4">
-        <div class="col-sm-6">
-            <div class="card mb-3" style="max-width: 600px;">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <img src="https://shop.sariwon.ph/cdn/shop/products/SARIWON-Sig-Set-4-Grab-1_1080x.png?v=1618469399" class="img-fluid rounded-start" style="height: 100%;">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Signature Grill Set</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">360g Deung Shim RIbeye</li>
-                                <li class="list-group-item">340g Yangnyeom Wagyu</li>
-                                <li class="list-group-item">360g Yangnyeom Galbisal</li>
-                                <li class="list-group-item">2 Dolsot Bibimbap</li>
-                                <li class="list-group-item">Salad, Lettuce, 5 Side Dishes</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6">
-            <div class="card mb-3" style="max-width: 600px;">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <img src="https://shop.sariwon.ph/cdn/shop/products/GRAB_750x750px_GALBIJIMSETFOR4_1080x.jpg?v=1678930598" class="img-fluid rounded-start" style="height: 100%;">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Galbi Jjim Grill Set</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">180g Yangnyeom Galbisal</li>
-                                <li class="list-group-item">200g Grilled Bulgogi</li>
-                                <li class="list-group-item">2 Beef Galbi Jjim</li>
-                                <li class="list-group-item">1 Japchae, 1 Gyeranjjim</li>
-                                <li class="list-group-item">Salad, 4 Rice, 5 Side Dishes</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--FOURTH ROW-->
-    <div class="row mb-4">
-        <div class="col-sm-6">
-            <div class="card mb-3" style="max-width: 600px;">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <img src="https://shop.sariwon.ph/cdn/shop/products/GRAB_750x750px_PREMIUMSETFOR2_900x.jpg?v=1678930666" class="img-fluid rounded-start" style="height: 100%;">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Premium Grill Set</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">340g Soondubu Chigae</li>
-                                <li class="list-group-item">330g Yangnyeom Galbisal</li>
-                                <li class="list-group-item">Mini Haemul Pajeon</li>
-                                <li class="list-group-item">Kaeinyachae Salad</li>
-                                <li class="list-group-item">Lettuce, 2 Rice, 5 Side Dishes</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6">
-            <div class="card mb-3" style="max-width: 600px;">
-                <div class="row g-0">
-                    <div class="col-md-5">
-                        <img src="https://shop.sariwon.ph/cdn/shop/products/sariwon-special-grill-set-for-4_1024x1024@2x.jpg?v=1591612454" class="img-fluid rounded-start" style="height: 100%;">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Special Grill Set</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">180g Yangnyeom Galbisal</li>
-                                <li class="list-group-item">250g Woo Samgyup</li>
-                                <li class="list-group-item">200g Grilled Bulgogi</li>
-                                <li class="list-group-item">1 Doenjang Chigae, 1 Pajeon</li>
-                                <li class="list-group-item">Lettuce, 4 Rice, 5 Side Dishes</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    }
     <!--end of container for descriptions-->
 </div>
 

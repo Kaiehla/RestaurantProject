@@ -9,18 +9,20 @@ namespace RestaurantProject.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private ICustomerDataService _customer;
+        private IPackageMenuDataService _packageMenu;
 
-        public HomeController(ILogger<HomeController> logger, ICustomerDataService customer)
+        public HomeController(ILogger<HomeController> logger, ICustomerDataService customer, IPackageMenuDataService packageMenu)
         {
             _logger = logger;
             _customer = customer;
+            _packageMenu = packageMenu;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var menuAndDetails = await _packageMenu.GetMenuAndDetailsAsync();
+            return View(menuAndDetails);
         }
-        //updated
 
         [HttpGet]
         public IActionResult BookForm(String packageId)

@@ -1,8 +1,6 @@
 using RestaurantProject.Data;
 using RestaurantProject.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using RestaurantProject.Controllers;
 
 namespace RestaurantProject.Services
 {

@@ -9,6 +9,7 @@ namespace RestaurantProject.Data
         public DbSet<PackageMenu> PackageMenu { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<RestaurantTable> RestaurantTable { get; set; }
+        public DbSet<PackageItems> PackageItems { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
