@@ -21,6 +21,18 @@ namespace RestaurantProject.Services
             return packageMenu;
         }
 
+        public async Task<List<string>> GetPackagesAsync()
+        {
+            List<string> packages = await _appDbContext.PackageMenu.Select(pm => pm.PackageName).ToListAsync();
+            return packages;
+        }
+
+        public async Task<List<decimal>> GetPricesAsync()
+        {
+            List<decimal> prices = await _appDbContext.PackageMenu.Select(pm => pm.Price).ToListAsync();
+            return prices;
+        }
+
         public async Task<List<PackageMenu>> AddPackageMenuAsync(PackageMenu model)
         {
             await _appDbContext.PackageMenu.AddAsync(model);
@@ -37,28 +49,6 @@ namespace RestaurantProject.Services
         public async Task<List<PackageMenu>> DeletePackageMenuAsync(PackageMenu model)
         {
             return null;
-        }
-
-        public async Task<List<PackageFullDetails>> GetPackageFullDetailsAsync()
-        {
-            var asd = await _appDbContext.PackageMenu.ToListAsync();
-
-            var packageFullDetails = await (from pi in _appDbContext.PackageItems
-                                            join pm in _appDbContext.PackageMenu
-                                            on pi.PackageId equals pm.Id
-                                            select new PackageFullDetails()
-                                            {
-                                                PackageMenuId = pm.Id,
-                                                PackageName = pm.PackageName,
-                                                PackageDescription = pm.PackageDescription,
-                                                PackageItem = pi.Item,
-                                                ImageLink = pm.ImageLink,
-                                                Price = pm.Price,
-                                                Duration = pm.Duration,
-                                                RecommendedNumber = pm.RecommendedNumber
-                                            }).ToListAsync();
-
-            return packageFullDetails;
         }
 
         public async Task<Tuple<List<PackageMenu>, List<PackageItems>>> GetMenuAndDetailsAsync()

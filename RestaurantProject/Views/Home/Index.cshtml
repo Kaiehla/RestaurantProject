@@ -41,7 +41,10 @@
                         <h6 class="card-subtitle mt-2">@Model.Item1[j].PackageDescription</h6>
                         <h6 class="card-subtitle mt-2">Good for @Model.Item1[j].Duration hours</h6>
                         <p class="card-text fw-bold">@String.Format(new CultureInfo("fil-PH"), "{0:C2}", Model.Item1[j].Price)</p>
-                        <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</a>
+                        <form asp-action="BookForm" method="get">
+                            <input type="hidden" name="packageName" id="packageName" value="@Model.Item1[j].PackageName" />
+                            <button class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="BookForm">Book Now</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -66,7 +69,7 @@
 <h1 class="text-center fw-bolder my-5">Package Inclusions</h1>
 @{
     j = 0;
-    col = 3; //Defines how many columns, the number of rows will be decided automatically. Changing this may or may not actually change the columns reliably due to the implementation of the HTML code
+    col = 2; //Defines how many columns, the number of rows will be decided automatically. Changing this may or may not actually change the columns reliably due to the implementation of the HTML code
 }
 <div class="container">
     @for (int i = 0; i <= Math.Ceiling(Convert.ToDecimal(Model.Item1.Count / col)); i++)

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RestaurantProject.Data;
 using RestaurantProject.Models;
 using RestaurantProject.Services;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RestaurantProject.Controllers
 {
@@ -25,11 +27,14 @@ namespace RestaurantProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult BookForm(String packageId)
+        public async Task<IActionResult> BookForm(string packageName, decimal price)
         {
-            ViewData["packageId"] = packageId;
+            var reserveForm = new ReserveForm();
 
-            return View();
+            reserveForm.PackageNames = await _packageMenu.GetPackagesAsync();
+            reserveForm.Prices = await _packageMenu.GetPricesAsync();
+
+            return View(reserveForm);
         }
 
         [HttpPost]
@@ -37,7 +42,7 @@ namespace RestaurantProject.Controllers
         {
             await _customer.AddCustomerAsync(reservation);
 
-            return RedirectToAction("BookForm");
+            return RedirectToAction("ConfirmBook");
         }
 
         public IActionResult CustomerView()

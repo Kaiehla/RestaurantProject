@@ -1,9 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestaurantProject.Models
 {
     public class ReserveForm
     {
+        //Lists for generating dropdown
+        public List<string> PackageNames { get; set; }
+        public List<decimal> Prices { get; set; }
+
+
         [Required]
         [DataType(DataType.Date)]
         public DateTime ReservationDate { get; set; }
@@ -11,7 +17,7 @@ namespace RestaurantProject.Models
         [DataType(DataType.Time)]
         public TimeOnly ReservationTime {  get; set; }
         [Required]
-        public int PackageId { get; set; }
+        public string PackageName { get; set; }
         [Required]
         public int NumOfGuest { get; set; }
         [Required]
@@ -24,5 +30,7 @@ namespace RestaurantProject.Models
         public string CityAdd{ get; set; }
         [Required]
         public string PhoneNumber { get; set; }
+        [Required]
+        public decimal Price { get; set; }
     }
 }
