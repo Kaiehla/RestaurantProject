@@ -27,7 +27,7 @@ namespace RestaurantProject.Services
             {
                 var customer = customers.Where(x => x.Id == reservation.CustomerId).FirstOrDefault();
                 var packageMenu = packageMenus.Where(x => x.Id == reservation.PackageId).FirstOrDefault();
-                var restaurantTable = restaurantTables.Where(x => x.Id == reservation.TablesId).FirstOrDefault();
+                var restaurantTable = restaurantTables.Where(x => x.Id == reservation.TableId).FirstOrDefault();
 
                 reservationsExtra.Add(new ReservationExtra
                 {
@@ -41,13 +41,10 @@ namespace RestaurantProject.Services
             return reservationsExtra;
         }
 
-        public async Task<List<Reservation>> AddReservationAsync(Reservation model)
+        public async Task AddReservationAsync(Reservation model)
         {
             await _appDbContext.Reservation.AddAsync(model);
             await _appDbContext.SaveChangesAsync();
-
-            //di ako sure
-            return null;
         }
 
         public async Task<Reservation> DeleteReservationAsync(Reservation model)

@@ -7,6 +7,7 @@ namespace RestaurantProject.Services
         Task<List<PackageMenu>> GetPackageMenusAsync();
         Task<List<string>> GetPackagesAsync();
         Task<List<decimal>> GetPricesAsync();
+        Task<List<int>> GetIdsAsync();
         Task<List<PackageMenu>> AddPackageMenuAsync(PackageMenu packageMenu);
         Task<List<PackageMenu>> UpdatePackageMenuAsync(PackageMenu packageMenu);
         Task<List<PackageMenu>> DeletePackageMenuAsync(PackageMenu packageMenu);

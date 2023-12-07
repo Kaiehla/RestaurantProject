@@ -1,6 +1,7 @@
 ﻿@model ReserveForm
 @{
     ViewData["Title"] = "Book Form";
+    Console.Write(TempData["NoTablesAvailableError"]);
 
     Layout = "_Layout-Filled";
 }
@@ -12,6 +13,7 @@
     </div>
 
     <form class="needs-validation" id="reserveForm" name="reserveForm" method="post" asp-action="SubmitReservation" novalidate>
+        <input id="packageId" value="" hidden asp-for="PackageId">
     <div class="row g-5">
         <!--RESERVATION SUMMARY-->
         <div class="col-md-5 col-lg-4 order-md-last">
@@ -45,7 +47,7 @@
                         <select class="form-select" id="packageName" name="packageName" asp-for="PackageName">
                             @for(int i = 0; i < Model.PackageNames.Count; i++)
                             {
-                                <option value=@Model.PackageNames[i] data-id="@Model.Prices[i]">@Model.PackageNames[i]</option>
+                                <option value=@Model.PackageNames[i] data-price="@Model.Prices[i]" data-id="@Model.PackageIds[i]">@Model.PackageNames[i]</option>
                             }
                         </select>
                         <div class="invalid-feedback">
@@ -175,15 +177,55 @@
         </div>
     </div>
 
+<!-- Error Modal (No table with sufficient capacity found)-->
+<div class="modal fade" id="noFreeTableCapacityModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Reservation Error</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label class="form-label">No table to accomodate @Context.Request.Query["numOfGuest"] guests</label>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-success" id="exit" data-bs-dismiss="modal">Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal (No free tables found / All Tables are occupied)-->
+<div class="modal fade" id="noFreeTableModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Reservation Error</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label class="form-label">There are no free tables at the moment</label>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-success" id="exit" data-bs-dismiss="modal">Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <script>
         var flag = false;
-        //When an item is selected in the dropdown menu, get the data-id attribute (which contains the price of the package) and display the price
+        //When an item is selected in the dropdown menu, get the data-price attribute (which contains the price of the package) and display the price
         $(function () {
             $('#packageName').change(function () {
                 var option = $(this.options[this.selectedIndex]);
-                const price = option.attr('data-id');
+                const price = option.attr('data-price');
+                const packageId = option.attr('data-id');
                 $('#price').val(price);
+                $('#packageId').val(packageId);
             });
         })
         //When the page has loaded, get the price of the package selected in the homepage by using the data-id attribute
@@ -191,8 +233,18 @@
             $(document).ready(function () {
                 var select = document.getElementById('packageName');
                 var option = $(select.options[select.selectedIndex]);
-                const price = option.attr('data-id');
+                const price = option.attr('data-price');
+                const packageId = option.attr('data-id');
                 $('#price').val(price);
+                $('#packageId').val(packageId);
+
+                //Show modal if there are no available tables due to Seating Capacity requirements
+                if ('@TempData["NoTablesAvailableError"]') {
+                    $('#noFreeTableCapacityModal').modal('show');
+                }
+                else if ('@TempData["NNoFreeTables"]') {
+                    $('#noFreeTableModal').modal('show');
+                }
             });
         //When "Continue To Checkout" button is pressed, empty input fields will get warning messages
         //When all information has been entered, a confirmation dialog wil pop up

@@ -32,6 +32,11 @@ namespace RestaurantProject.Services
             List<decimal> prices = await _appDbContext.PackageMenu.Select(pm => pm.Price).ToListAsync();
             return prices;
         }
+        public async Task<List<int>> GetIdsAsync()
+        {
+            List<int> prices = await _appDbContext.PackageMenu.Select(pm => pm.Id).ToListAsync();
+            return prices;
+        }
 
         public async Task<List<PackageMenu>> AddPackageMenuAsync(PackageMenu model)
         {

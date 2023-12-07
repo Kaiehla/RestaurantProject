@@ -21,6 +21,16 @@ namespace RestaurantProject.Services
             return restoTables;
         }
 
+        public async Task<RestaurantTable> GetFreeRestaurantTableAsync(int numOfGuest)
+        {
+            return await _appDbContext.RestaurantTable.Where(x => x.Availability == "Free").Where(x => x.SeatingCapacity >= numOfGuest).FirstOrDefaultAsync();
+        }
+
+        public async Task<RestaurantTable> FreeTableExistsAsync()
+        {
+            return await _appDbContext.RestaurantTable.Where(x => x.Availability == "Free").FirstOrDefaultAsync();
+        }
+
         public async Task<List<RestaurantTable>> AddRestaurantTableAsync(RestaurantTable table)
         {
             return null;
@@ -31,9 +41,18 @@ namespace RestaurantProject.Services
             return null;
         }
 
-        public async Task<List<RestaurantTable>> UpdateRestaurantTableAsync(RestaurantTable table)
+        public async Task UpdateRestaurantTableAsync(RestaurantTable table)
         {
-            return null;
+            var selectedTable = await _appDbContext.RestaurantTable.Where(x => x.Id == table.Id).FirstOrDefaultAsync();
+
+            if (selectedTable != null)
+            {
+                selectedTable.TableName = table.TableName;
+                selectedTable.SeatingCapacity = table.SeatingCapacity;
+                selectedTable.Availability = table.Availability;
+
+                await _appDbContext.SaveChangesAsync();
+            }
         }
 
 

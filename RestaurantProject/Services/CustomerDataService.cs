@@ -24,29 +24,14 @@ namespace RestaurantProject.Services
             return singleCustomer;
         }
 
-        public async Task AddCustomerAsync(ReserveForm reservation)
+        public async Task AddCustomerAsync(Customer customer)
         {
-            var entryCustomer = new Customer
-            {
-                FirstName = reservation.FirstName,
-                LastName = reservation.LastName,
-                Email = reservation.Email,
-                PhoneNumber = reservation.PhoneNumber,
-                CityAdd = reservation.CityAdd
-            };
-
-            await _appDbContext.Customer.AddAsync(entryCustomer);
+            await _appDbContext.Customer.AddAsync(customer);
             await _appDbContext.SaveChangesAsync();
-
-            //var entryReservation = new Reservation
-            //{
-            //    CustomerId = entryCustomer.Id,
-
-            //    PackageId = reservation.PackageId,
         }
 
 	    public async Task DeleteCustomerAsync(int customerId)
-	     {
+	    {
             //Find the row in the customer table and Reservation table that has the given customerId
 		    var customer = await _appDbContext.Customer.FindAsync(customerId);
 
@@ -69,7 +54,7 @@ namespace RestaurantProject.Services
                     await _appDbContext.SaveChangesAsync();
                 }
             }
-	     }
+	    }
 
         public async Task UpdateCustomerAsync(Customer customer)
         {

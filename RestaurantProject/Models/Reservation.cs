@@ -17,13 +17,12 @@ namespace RestaurantProject.Models
         public virtual Customer Customer { get; set; }
 
         [ForeignKey("RestaurantTable")]
-        public int TablesId { get; set; }
+        public int TableId { get; set; }
         public virtual RestaurantTable RestaurantTable { get; set; }
 
         [ForeignKey("PackageMenu")]
         public int PackageId { get; set; }
         public virtual PackageMenu PackageMenu { get; set; }
-
         public DateTime ReservationDate { get; set; }
         public TimeSpan ReservationTime { get; set; }
         public int NumOfGuest { get; set; }

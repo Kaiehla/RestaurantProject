@@ -7,6 +7,7 @@ namespace RestaurantProject.Models
     {
         //Lists for generating dropdown
         public List<string> PackageNames { get; set; }
+        public List<int> PackageIds { get; set; }
         public List<decimal> Prices { get; set; }
 
 
@@ -16,6 +17,8 @@ namespace RestaurantProject.Models
         [Required]
         [DataType(DataType.Time)]
         public TimeOnly ReservationTime {  get; set; }
+        [Required]
+        public int PackageId { get; set; }
         [Required]
         public string PackageName { get; set; }
         [Required]

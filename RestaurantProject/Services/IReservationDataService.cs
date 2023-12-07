@@ -7,7 +7,7 @@ namespace RestaurantProject.Services
     public interface IReservationDataService
     {
         Task<List<ReservationExtra>> GetReservationsAsync();
-        Task<List<Reservation>> AddReservationAsync(Reservation reservation); //Di kailangan since hindi pwede mag add ng reservation by itself?
+        Task AddReservationAsync(Reservation reservation);
         Task<Reservation> DeleteReservationAsync(Reservation model);
         Task<List<Reservation>> UpdateReservationAsync(Reservation reservation);
     }
