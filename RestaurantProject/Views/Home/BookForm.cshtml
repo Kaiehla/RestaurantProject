@@ -11,7 +11,7 @@
         <p class="lead">This is the reservation form</p>
     </div>
 
-    <form class="needs-validation" method="post" asp-action="SubmitReservation">
+    <form class="needs-validation" id="reserveForm" name="reserveForm" method="post" asp-action="SubmitReservation" novalidate>
     <div class="row g-5">
         <!--RESERVATION SUMMARY-->
         <div class="col-md-5 col-lg-4 order-md-last">
@@ -22,13 +22,19 @@
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Reservation Date</h6>
-                            <input class="form-control" id="datepicker" placeholder="July 10, 2023" value="" required asp-for="ReservationDate">
+                        <input class="form-control" id="datepicker" placeholder="July 10, 2023" value="" required asp-for="ReservationDate">
+                        <div class="invalid-feedback">
+                            Valid date is required.
+                        </div>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Reservation Time</h6>
-                            <input class="form-control" id="timepicker" placeholder="10:30PM" value="" required asp-for="ReservationTime">
+                        <input class="form-control" id="timepicker" placeholder="10:30PM" value="" required asp-for="ReservationTime">
+                        <div class="invalid-feedback">
+                            Valid time is required.
+                        </div>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -42,13 +48,19 @@
                                 <option value=@Model.PackageNames[i] data-id="@Model.Prices[i]">@Model.PackageNames[i]</option>
                             }
                         </select>
+                        <div class="invalid-feedback">
+                            Valid package is required.
+                        </div>
                            @*  <input type="text" class="form-control" id="packageId" placeholder="@Model" value="@packageName" required asp-for="PackageName" /> *@
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
-                        <h6 class="my-0">Number of Guest</h6>
-                            <input type="number" class="form-control" id="numGuest" placeholder="0" value="" required asp-for="NumOfGuest" />
+                        <h6 class="my-0">Number of Guests</h6>
+                        <input type="number" class="form-control" id="numGuest" placeholder="0" value="" required asp-for="NumOfGuest" />
+                        <div class="invalid-feedback">
+                            Valid number of Guests is required.
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -56,7 +68,7 @@
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Price (in Philippine Pesos)</h6>
-                            <input type="number" class="form-control" id="Price" placeholder="0.00" value="" asp-for="Price" readonly />
+                        <input type="number" class="form-control" id="price" placeholder="0.00" value="" asp-for="Price" readonly />
                     </div>
                 </li>
             </ul>
@@ -76,7 +88,7 @@
 
                     <div class="col-sm-6">
                         <label for="lastName" class="form-label">Last name</label>
-                        <input type="text" class="form-control" id="Price" placeholder="Dimagiba" value="" required asp-for="LastName">
+                        <input type="text" class="form-control" id="lastName" placeholder="Dimagiba" value="" required asp-for="LastName">
                         <div class="invalid-feedback">
                             Valid last name is required.
                         </div>
@@ -108,7 +120,7 @@
                     </div>
                 </div>
             <br>
-            <button class="w-100 btn btn-dark btn-lg mb-5" type="submit" @* asp-action="ConfirmBook" *@>Continue to checkout</button>
+                <button class="w-100 btn btn-dark btn-lg mb-5" id="continueButton" type="submit" >Continue to checkout</button>
             <br/>
             <br />
             <br />
@@ -118,14 +130,60 @@
     </form>
 </div>
 
+<!-- Confirmation Modal-->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Continue to checkout with provided information?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label">Name</label>
+                    <input class="form-control" id="modalName" value="" readonly/>
+
+                    <label class="form-label">Email</label>
+                    <input class="form-control" id="modalEmail" value="" readonly />
+
+                    <label class="form-label">Address</label>
+                    <input class="form-control" id="modalAddress" value="" readonly />
+
+                    <label class="form-label">Phone Number</label>
+                    <input class="form-control" id="modalNumber" value="" readonly />
+
+                    <label class="form-label">Reservation Date</label>
+                    <input class="form-control" id="modalDate" value="" readonly />
+
+                    <label class="form-label">ReservationTime</label>
+                    <input class="form-control" id="modalTime" value="" readonly />
+
+                    <label class="form-label">Package</label>
+                    <input class="form-control" id="modalPackageName" value="" readonly />
+
+                    <label class="form-label">Number of Guests</label>
+                    <input class="form-control" id="modalNumGuest" value="" readonly />
+
+                    <label class="form-label">Price</label>
+                    <input class="form-control" id="modalPrice" value="" readonly />
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success-secondary" id="close" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="button" id="confirmButton">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @section Scripts{
     <script>
+        var flag = false;
         //When an item is selected in the dropdown menu, get the data-id attribute (which contains the price of the package) and display the price
         $(function () {
             $('#packageName').change(function () {
                 var option = $(this.options[this.selectedIndex]);
                 const price = option.attr('data-id');
-                $('#Price').val(price);
+                $('#price').val(price);
             });
         })
         //When the page has loaded, get the price of the package selected in the homepage by using the data-id attribute
@@ -134,7 +192,55 @@
                 var select = document.getElementById('packageName');
                 var option = $(select.options[select.selectedIndex]);
                 const price = option.attr('data-id');
-                $('#Price').val(price);
+                $('#price').val(price);
+            });
+        //When "Continue To Checkout" button is pressed, empty input fields will get warning messages
+        //When all information has been entered, a confirmation dialog wil pop up
+        })
+        $(function () {
+            'use strict'
+
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        else{
+                            if (flag == false){
+                                //Copy input fields and transfer them to the modal
+                                var firstName = $('#firstName').val()
+                                var lastName = $('#lastName').val()
+                                $('#modalName').val(firstName + ' ' + lastName)
+                                $('#modalEmail').val($('#email').val())
+                                $('#modalAddress').val($('#address').val())
+                                $('#modalNumber').val($('#number').val())
+                                $('#modalDate').val($('#datepicker').val())
+                                $('#modalTime').val($('#timepicker').val())
+                                $('#modalPackageName').val($('#packageName').val())
+                                $('#modalNumGuest').val($('#numGuest').val())
+                                $('#modalPrice').val($('#price').val())
+
+                                $('#confirmModal').modal('show');
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+                            else{
+                                return true
+                            }
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })
+        //When the "Continue" button is pressed, the reservation will finally be submitted
+        $(function () {
+            $('#confirmButton').click(function () {
+                flag = true;
+                $('#reserveForm').trigger('submit');
             });
         })
     </script>
