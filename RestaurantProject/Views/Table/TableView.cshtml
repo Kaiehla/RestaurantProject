@@ -45,12 +45,12 @@
                                 }
                                 <td class="text-center">
                                     @*Edit*@
-                                    <a data-bs-toggle="modal" data-bs-target="#editReserve">
+                                    <a data-bs-toggle="modal" data-bs-target="#editRestaurantTable">
                                         <i class="bi bi-pencil text-success"></i>
                                     </a>
 
                                     @*Delete*@
-                                    <a data-bs-toggle="modal" data-bs-target="#delReserve">
+                                    <a data-bs-toggle="modal" data-bs-target="#delRestaurantTable">
                                         <i class="bi bi-trash text-danger"></i>
                                     </a>
                                 </td>
@@ -64,4 +64,33 @@
 
     </div>
 </div>
-@*end of overall*@
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editRestaurantTable" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form asp-action="UpdateRestaurantTable" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Table</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @*Walang laman dito. ang mangyayari is may separate file na _CustomerDetails.cshtml.
+                    Dun gagawin yung laman ng modal, tapos i-rerender sa loob ng <div> na may class name na "modal-body".
+                    ang _CustomerDetails ay referred to as a Partial Page, partial kase yung html ng partial page na yun ay
+                    isasama sa regular na page file, like yung CustomerView.cshtml
+
+                    Gumamit tayo ng javascript event listener para ma-generate yung modal the moment na pumindot tayo ng specific na button.
+                    yung button na yun (check mo sa line 99) ay may data-id na attribute. Yung data-id na yun is yung id ng customer natin.
+                    Kailangan natin yun para pag pinindot natin yung button, yung customer id ay madadala sa Customer controller, yun yung
+                    id number na gagamitin natin para mahanap yung customer details sa database*@
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success-secondary" asp-action="CustomerView">Cancel</button>
+                    <button class="btn btn-success" type="submit">Update</button>
+                </div>
+        </form>
+    </div>
+</div>
+

@@ -9,5 +9,6 @@ namespace RestaurantProject.Services
         Task AddCustomerAsync(Customer customer);
         Task DeleteCustomerAsync(int customerId);
         Task UpdateCustomerAsync(Customer customer);
+        Task<Customer> IsExists(Customer customer);
     }
 }

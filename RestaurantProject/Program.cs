@@ -15,6 +15,7 @@ builder.Services.AddScoped<IReservationDataService, ReservationDataService>();
 builder.Services.AddScoped<ICustomerDataService, CustomerDataService>();
 builder.Services.AddScoped<IRestaurantTableDataService, RestaurantTableDataService>();
 builder.Services.AddScoped<IPackageMenuDataService, PackageMenuDataService>();
+builder.Services.AddScoped<IPackageItemsDataService, PackageItemsDataService>();
 
 var app = builder.Build();
 

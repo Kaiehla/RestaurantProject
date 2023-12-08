@@ -24,6 +24,11 @@ namespace RestaurantProject.Services
             return singleCustomer;
         }
 
+        public async Task<Customer> IsExists(Customer customer)
+        {
+            return await _appDbContext.Customer.Where(x => x.FirstName == customer.FirstName).Where(x => x.LastName == customer.LastName).Where(x => x.Email == customer.Email).Where(x => x.PhoneNumber == customer.PhoneNumber).Where(x => x.CityAdd == customer.CityAdd).FirstOrDefaultAsync();
+        }
+
         public async Task AddCustomerAsync(Customer customer)
         {
             await _appDbContext.Customer.AddAsync(customer);

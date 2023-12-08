@@ -15,8 +15,10 @@ namespace RestaurantProject.Services
             _appDbContext = appDbContext;
         }
 
-        public async Task<List<ReservationExtra>> GetReservationsAsync()
+        public async Task<List<Reservation>> GetReservationsAsync()
         {
+            return await _appDbContext.Reservation.ToListAsync();
+
             var reservationsExtra = new List<ReservationExtra>();
             var reservations = await _appDbContext.Reservation.ToListAsync();
             var customers = await _appDbContext.Customer.ToListAsync();
@@ -39,6 +41,18 @@ namespace RestaurantProject.Services
             }
 
             return reservationsExtra;
+        }
+
+        public async Task<List<ReservationExtra>> GetReservationsExtraAsync()
+        {
+            var reservationExtra = (from R )
+        }
+
+        public async Task<Reservation> IsExists(Reservation reservation)
+        {
+            //await _appDbContext.Reservation.Where(x => x.CustomerId == reservation.CustomerId).Where(x => x.PackageId == reservation.PackageId).Where(x => x.ReservationDate == reservation.ReservationDate).Where(x => x.ReservationTime == reservation.ReservationTime)
+
+            return null;
         }
 
         public async Task AddReservationAsync(Reservation model)

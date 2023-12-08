@@ -45,23 +45,8 @@ namespace RestaurantProject.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitReservation(ReserveForm reserveForm)
         {
-            //If there are no free tables, redirect to BookForm.cshtml and notify user
-            if(await _restaurantTable.FreeTableExistsAsync() == null)
-            {
-                TempData["NoFreeTables"] = true;
-                return RedirectToAction("BookForm");
-            }
-
             //Select a table that is free and has enough seating capacity
             var freeTable = await _restaurantTable.GetFreeRestaurantTableAsync(reserveForm.NumOfGuest);
-
-            //Check if there is a free table that matches the requirements (Free and has enough capacity for the number of guests)
-            if(freeTable != null)
-            {
-                //Update the availability of the table and get its Id
-                var tableId = freeTable.Id;
-                freeTable.Availability = "Assigned";
-                await _restaurantTable.UpdateRestaurantTableAsync(freeTable);
 
                 //Create a customer entry using information from reserveForm
                 var entryCustomer = new Customer
@@ -73,8 +58,32 @@ namespace RestaurantProject.Controllers
                     CityAdd = reserveForm.CityAdd
                 };
 
-                await _customer.AddCustomerAsync(entryCustomer);
+            //Check if entryCustomer already exists
+            var existingCustomer = await _customer.IsExists(entryCustomer);
+            int customerId;
             
+            if(await _restaurantTable.FreeTableExistsAsync() == null)   //If there are no free tables (All tables are reserved), redirect to BookForm.cshtml and notify user
+            {
+                TempData["NoFreeTables"] = true;
+                return RedirectToAction("BookForm");
+            }
+            else if(freeTable == null)  //If there is no table available for the number of guests
+            {
+                TempData["NoTablesAvailableError"] = true;
+                return RedirectToAction("BookForm", new { numOfGuest = reserveForm.NumOfGuest });
+
+            }
+            else if(existingCustomer != null)   //If customer details already exist in the database
+            {
+                customerId = existingCustomer.Id;
+            }
+
+            //Update the availability of the table and get its Id
+            var tableId = freeTable.Id;
+            freeTable.Availability = "Assigned";
+            await _restaurantTable.UpdateRestaurantTableAsync(freeTable);
+
+            await _customer.AddCustomerAsync(entryCustomer);
 
                 //Create a reservation entry using information from reserveForm
                 var entryReservation = new Reservation
@@ -92,14 +101,52 @@ namespace RestaurantProject.Controllers
                 await _reservation.AddReservationAsync(entryReservation);
             
                 return RedirectToAction("ConfirmBook");
-            }
-            else
-            {
-                TempData["NoTablesAvailableError"] = true;
+
+            ////Check if there is a free table that matches the requirements (Free and has enough capacity for the number of guests)
+            //if (freeTable != null)
+            //{
+            //    //Update the availability of the table and get its Id
+            //    var tableId = freeTable.Id;
+            //    freeTable.Availability = "Assigned";
+            //    await _restaurantTable.UpdateRestaurantTableAsync(freeTable);
+
+            //    //Create a customer entry using information from reserveForm
+            //    var entryCustomer = new Customer
+            //    {
+            //        FirstName = reserveForm.FirstName,
+            //        LastName = reserveForm.LastName,
+            //        Email = reserveForm.Email,
+            //        PhoneNumber = reserveForm.PhoneNumber,
+            //        CityAdd = reserveForm.CityAdd
+            //    };
+
+            //    await _customer.AddCustomerAsync(entryCustomer);
+            
+
+            //    //Create a reservation entry using information from reserveForm
+            //    var entryReservation = new Reservation
+            //    {
+            //        CustomerId = entryCustomer.Id,
+            //        TableId = tableId,
+            //        PackageId = reserveForm.PackageId,
+            //        ReservationDate = reserveForm.ReservationDate,
+            //        ReservationTime = reserveForm.ReservationTime.ToTimeSpan(),
+            //        NumOfGuest = reserveForm.NumOfGuest,
+            //        Status = 1
+            //    };
+
+            //    //Add reservation to table
+            //    await _reservation.AddReservationAsync(entryReservation);
+            
+            //    return RedirectToAction("ConfirmBook");
+            //}
+            //else
+            //{
+            //    TempData["NoTablesAvailableError"] = true;
 
 
-                return RedirectToAction("BookForm", new { numOfGuest = reserveForm.NumOfGuest });
-            }
+            //    return RedirectToAction("BookForm", new { numOfGuest = reserveForm.NumOfGuest });
+            //}
         }
 
         public IActionResult CustomerView()
