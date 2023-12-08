@@ -47,9 +47,9 @@ namespace RestaurantProject.Services
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task<Reservation> DeleteReservationAsync(Reservation model)
+        public async Task<Reservation> DeleteReservationAsync(int id)
         {
-            var reservation  = await _appDbContext.Reservation.FindAsync(model.Id);
+            var reservation  = await _appDbContext.Reservation.FindAsync(id);
 
             if (reservation != null)
             {
@@ -71,5 +71,11 @@ namespace RestaurantProject.Services
         {
             return await _appDbContext.Reservation.Where(x => x.PackageId == id).FirstOrDefaultAsync();
         }
+
+        public async Task<Reservation> TableIsCurrentlyInUse(int id)
+        {
+            return await _appDbContext.Reservation.Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
     }
 }

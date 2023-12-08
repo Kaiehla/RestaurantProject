@@ -45,12 +45,12 @@
                                 }
                                 <td class="text-center">
                                     @*Edit*@
-                                    <a data-bs-toggle="modal" data-bs-target="#editReserve">
+                                    <a class="edit" data-bs-toggle="modal" data-bs-target="#editTable" data-id="@data.Id">
                                         <i class="bi bi-pencil text-success"></i>
                                     </a>
 
                                     @*Delete*@
-                                    <a data-bs-toggle="modal" data-bs-target="#delReserve">
+                                    <a class="delete" data-bs-toggle="modal" data-bs-target="#deleteTable" data-id="@data.Id">
                                         <i class="bi bi-trash text-danger"></i>
                                     </a>
                                 </td>
@@ -64,4 +64,101 @@
 
     </div>
 </div>
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editTable" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form asp-action="UpdateTable" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Table Info</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@*end of modal*@
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteTable" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <form asp-action="DeleteTable" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Table?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-danger-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Table?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-danger-secondary" data-bs-dismiss="modal">Exit</button>
+                </div>
+            </div>
+    </div>
+</div>
+
 @*end of overall*@
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('a.edit').on('click', function () {
+                var id = $(this).data("id")
+                $.ajax({
+                    url: `@Url.Action("TableDetails", "Table")`,
+                    method: "GET",
+                    data: { id: id },
+                    success: function (data) {
+                        $(".modal-body").html(data)
+                    }
+                })
+            });
+        })
+        $(function () {
+            $('a.delete').on('click', function () {
+                var id = $(this).data("id")
+                $.ajax({
+                    url: `@Url.Action("TableDetailsViewOnly", "Table")`,
+                    method: "GET",
+                    data: { id: id },
+                    success: function (data) {
+                        $(".modal-body").html(data)
+                    }
+                })
+            });
+        })
+    </script>
+}

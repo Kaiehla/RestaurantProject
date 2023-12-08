@@ -1,0 +1,20 @@
+﻿@model RestaurantTable
+
+<div class="row mt-2">
+    <input type="hidden" id="id" value="@Model.Id" asp-for="Id">
+
+    <div class="col-6 mt-2">
+        <label for="tableName" class="form-label">Table Name</label>
+        <input type="text" class="form-control" id="tableName" value="@Model.TableName" required="" asp-for="TableName">
+    </div>
+
+    <div class="col-6 mt-2">
+        <label for="seatingCapacity" class="form-label">Seating Capacity</label>
+        <input type="text" class="form-control" id="seatingCapacity" value="@Model.SeatingCapacity" required="" asp-for="SeatingCapacity">
+    </div>
+
+    <div class="col-6 mt-2">
+        <label for="availability" class="form-label">Availability</label>
+        <input type="text" class="form-control" id="availability" value="@Model.Availability" required="" asp-for="Availability">
+    </div>
+</div>
