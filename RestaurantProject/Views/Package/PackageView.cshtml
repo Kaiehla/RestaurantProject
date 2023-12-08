@@ -21,6 +21,7 @@
                         <th scope="col">Package Description</th> @*kunin yung equivalent lastname, ang ipapakita dito yung customer last name*@
                         <th scope="col">Price</th> @*kunin yung equivalent email, ang ipapakita dito yung customer email*@
                         <th scope="col">Duration</th> @*kunin yung equivalent phone, ang ipapakita dito yung customer phone num*@
+                        <th scope="col">Suitable For</th>
                         <th scope="col" class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -37,6 +38,7 @@
                             <td>@data.PackageDescription</td>
                             <td>@data.Price</td>
                             <td>@data.Duration Hours</td>   @*Imbis na INT gawin nalang na Time data type sa database?*@
+                            <td>@data.RecommendedNumber</td>
                             <td class="text-center">
                                 @*Edit*@
                                 <a class="edit" data-bs-toggle="modal" data-bs-target="#editPackage" data-id="@data.Id">
