@@ -1,6 +1,10 @@
 ﻿using RestaurantProject.Data;
 using RestaurantProject.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System;
 
 namespace RestaurantProject.Services
 {
@@ -36,9 +40,11 @@ namespace RestaurantProject.Services
             return null;
         }
 
-        public async Task<RestaurantTable> DeleteRestaurantTableAsync(RestaurantTable table)
+        public async Task DeleteRestaurantTableAsync(int id)
         {
-            return null;
+            var table = await _appDbContext.RestaurantTable.FindAsync(id);
+            _appDbContext.RestaurantTable.Remove(table);
+            await _appDbContext.SaveChangesAsync();
         }
 
         public async Task UpdateRestaurantTableAsync(RestaurantTable table)
@@ -55,6 +61,14 @@ namespace RestaurantProject.Services
             }
         }
 
+        public async Task<RestaurantTable> GetSingleTableAsync(int id)
+        {
+            var singleTable = await _appDbContext.RestaurantTable.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return singleTable;
+
+        }
+
+        
 
     }
 }

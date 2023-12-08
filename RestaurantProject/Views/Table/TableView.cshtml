@@ -45,12 +45,12 @@
                                 }
                                 <td class="text-center">
                                     @*Edit*@
-                                    <a data-bs-toggle="modal" data-bs-target="#editReserve">
+                                    <a class="edit" data-bs-toggle="modal" data-bs-target="#editTable" data-id="@data.Id">
                                         <i class="bi bi-pencil text-success"></i>
                                     </a>
 
                                     @*Delete*@
-                                    <a data-bs-toggle="modal" data-bs-target="#delReserve">
+                                    <a class="delete" data-bs-toggle="modal" data-bs-target="#deleteTable" data-id="@data.Id">
                                         <i class="bi bi-trash text-danger"></i>
                                     </a>
                                 </td>
@@ -62,3 +62,34 @@
             </div>
         </div>
 @*end of overall*@
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('a.edit').on('click', function () {
+                var id = $(this).data("id")
+                $.ajax({
+                    url: `@Url.Action("TableDetails", "Table")`,
+                    method: "GET",
+                    data: { id: id },
+                    success: function (data) {
+                        $(".modal-body").html(data)
+                    }
+                })
+            });
+        })
+        $(function () {
+            $('a.delete').on('click', function () {
+                var id = $(this).data("id")
+                $.ajax({
+                    url: `@Url.Action("TableDetailsViewOnly", "Table")`,
+                    method: "GET",
+                    data: { id: id },
+                    success: function (data) {
+                        $(".modal-body").html(data)
+                    }
+                })
+            });
+        })
+    </script>
+}

@@ -19,10 +19,9 @@ namespace RestaurantProject.Controllers
             return View(reservations);
         }
 
-        public async Task<IActionResult> Delete(Reservation model)
+        public async Task<IActionResult> Delete(int id)
         {
-            var reservation = await _reservations.DeleteReservationAsync(model);
-
+            var reservation = await _reservations.DeleteReservationAsync(id);
             return RedirectToAction("ReserveView");
         }
 

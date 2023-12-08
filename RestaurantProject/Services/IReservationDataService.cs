@@ -8,8 +8,9 @@ namespace RestaurantProject.Services
     {
         Task<List<ReservationExtra>> GetReservationsAsync();
         Task AddReservationAsync(Reservation reservation);
-        Task<Reservation> DeleteReservationAsync(Reservation model);
+        Task<Reservation> DeleteReservationAsync(int id);
         Task<List<Reservation>> UpdateReservationAsync(Reservation reservation);
         Task<Reservation> PackageIsCurrentlyInUse(int id);
+        Task<Reservation> TableIsCurrentlyInUse(int id);
     }
 }
