@@ -1,0 +1,29 @@
+﻿@model PackageMenu
+
+<div class="row">
+    <input type="hidden" value="@Model.Id" name="Id" asp-for="Id">
+
+    <div class="col">
+        <label for="packageName" class="form-label">Package Name</label>
+        <input type="text" class="form-control" id="packageName" value="@Model.PackageName" required="" disabled="disabled">
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        <label for="packageDesc" class="form-label">Package Description</label>
+        <input type="text" class="form-control" id="packageDesc" value="@Model.PackageDescription" required="" disabled="disabled">
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-6">
+        <label for="price" class="form-label">Price</label>
+        <input type="text" class="form-control" id="price" value="@Model.Price" required="" disabled="disabled">
+    </div>
+
+    <div class="col-6">
+        <label for="duration" class="form-label">Duration</label>
+        <input type="text" class="form-control" id="duration" value="@Model.Duration" required="" disabled="disabled">
+    </div>
+</div>

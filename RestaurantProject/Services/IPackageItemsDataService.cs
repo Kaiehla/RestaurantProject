@@ -7,6 +7,6 @@ namespace RestaurantProject.Services
         Task<List<PackageItems>> GetPackageItemsAsync();
         Task<List<PackageItems>> AddPackageItemAsync(PackageItems packageItem);
         Task<List<PackageItems>> UpdatePackageItemAsync(PackageItems packageItem);
-        Task<List<PackageItems>> DeletePackageItemAsync(PackageItems packageItem);
+        Task DeletePackageItemAsync(int packageId);
     }
 }

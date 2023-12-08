@@ -27,9 +27,15 @@ namespace RestaurantProject.Services
             return null;
         }
 
-        public async Task<List<PackageItems>> DeletePackageItemAsync(PackageItems packageItem)
+        public async Task DeletePackageItemAsync(int packageId)
         {
-            return null;
+            var items = await _appDbContext.PackageItems.Where(x => x.PackageId == packageId).ToListAsync();
+
+            foreach (var item in items)
+            {
+                _appDbContext.PackageItems.Remove(item);
+                await _appDbContext.SaveChangesAsync();
+            }
         }
     }
 }

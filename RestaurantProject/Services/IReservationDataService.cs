@@ -10,5 +10,6 @@ namespace RestaurantProject.Services
         Task AddReservationAsync(Reservation reservation);
         Task<Reservation> DeleteReservationAsync(Reservation model);
         Task<List<Reservation>> UpdateReservationAsync(Reservation reservation);
+        Task<Reservation> PackageIsCurrentlyInUse(int id);
     }
 }

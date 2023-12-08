@@ -67,13 +67,9 @@ namespace RestaurantProject.Services
 
             return null;
         }
-
-
-
-
-
-
-
-
+        public async Task<Reservation> PackageIsCurrentlyInUse(int id)
+        {
+            return await _appDbContext.Reservation.Where(x => x.PackageId == id).FirstOrDefaultAsync();
+        }
     }
 }
