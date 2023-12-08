@@ -14,12 +14,12 @@
 
     <div class="col-6 mt-2">
         <label for="phone" class="form-label">Phone</label>
-        <input type="text" disabled="disabled" class="form-control" id="phone" value="@Model.PhoneNumber">
+        <input type="text" disabled="disabled" class="form-control" id="phone" value="@Model.PhoneNumber" pattern="[0][9][0-9]{9}" maxlength="11">
     </div>
 
     <div class="col-6 mt-2">
         <label for="email" class="form-label">Email</label>
-        <input type="text" disabled="disabled" class="form-control" id="email" value="@Model.Email">
+        <input type="email" disabled="disabled" class="form-control" id="email" value="@Model.Email">
     </div>
 </div>
 
